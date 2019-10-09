@@ -1,0 +1,45 @@
+public class break结构 {
+	public static void main(String[] args) {
+		int i = 0;
+		int k =0;
+		while(true) {
+			if(i>100) {
+				break;//直接终止循环；
+			}
+			i +=2;
+			k++;
+			System.out.print(i+"\t");
+			
+			if(k==5) {
+				System.out.println();
+				k = 0;
+				
+			}
+			
+		}for(int s = 1;s>0;s++) {
+			if(s%5==0) {
+				System.out.println();
+			}
+			if(s<100) {
+			System.out.print(s+"\t");
+			
+			}else {
+				break;
+			}
+			
+		}System.out.println("##########################");
+		while(i<100) {
+			System.out.print(i+"\t");
+		    i++;
+		    if(i%5==0) {
+		    	System.out.println();
+		    }
+		    if(i %20==0) {
+		    	continue;//终止本次循环；
+		    }
+		}
+		
+		
+		}
+		
+	}

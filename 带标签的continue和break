@@ -1,0 +1,14 @@
+public class 带标签的continue和break {
+	public static void main(String[] args) {
+		//写出101~150之间所有的质数；
+		outer:for(int i = 101;i<150;i++) {//continue和break结构带标签可以实现内部循环到外部循环的操作，如标签名（outer）：
+			for(int j =2;j<=i/2;j++) {//当j==i/2时，即i可以被2整除·商是j，后面就不需要循环了，因为i已经不可能被2整除了。
+				if(i%j==0) {
+					continue outer;//continue之后接标签名可以跳到标签处。
+				}
+			}System.out.println(i);
+		}
+	}
+
+}
+
