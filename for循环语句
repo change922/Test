@@ -1,0 +1,19 @@
+public class for循环的结构 {
+	public static void main(String[] args) {
+//for循环具有简洁，灵活的特点，结构为：for（初始表达式；boolean表达式；步进（迭代因子）），for循环语句执行前
+//先执行初始化表达式，在执行boolean表达式，若为true，则执行循环体，在执行步进。顺序同while；
+		int sum = 0;
+		for(int i=1;i<=100;i++) {//先执行初始化语句int i = 1;再判断boolean表达式i<=100;为true，执行循环体，再执行
+			//迭代：i++；
+			sum = sum+i;
+		
+		}System.out.println(sum);
+		for(int i = 1, j = 0;i<100&&j<200;i=i+2,j++) {//当需要执行的初始化表达式不止一个时，用“，”隔开，boolean和迭代
+			//也相同，都可用“，”隔开
+			sum = j+i;
+		}System.out.println(sum);
+	}
+
+}
+
+

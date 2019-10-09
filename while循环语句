@@ -1,0 +1,41 @@
+//while循环语句的结构：while(boolean表达式){循环语句}
+public class while语句的循环结构 {
+	public static void main(String[] args) {
+		int sum = 0;
+		int i = 1;
+		while(i<=100) {//循环顺序：先判断i<=100,如果是，则执行循环语句，然后i++,在判断i<=100,如果为true，再执行
+			//循环语句。
+			sum = sum+i;
+			i++;
+			//System.out.println(sum);如果将输出写着这里会输出每一次循环的sum的值。
+		}System.out.println(sum);
+		do {
+			sum  += i;//sum(和)=sum+i;
+			i++;
+		}while(i<=0);
+		System.out.println(sum);//do{循环体}while（boolean表达式）;先执行循环体，再判断boolean表达式，若为true，
+		//继续执行循环体，否则终止，do{}while（）；至少执行一次循环。
+	}	
+//while循环语句的结构：while(boolean表达式){循环语句}
+public class while语句的循环结构 {
+	public static void main(String[] args) {
+		int sum = 0;
+		int i = 1;
+		while(i<=100) {//循环顺序：先判断i<=100,如果是，则执行循环语句，然后i++,在判断i<=100,如果为true，再执行
+			//循环语句。
+			sum = sum+i;
+			i++;
+			//System.out.println(sum);如果将输出写着这里会输出每一次循环的sum的值。
+		}System.out.println(sum);
+		do {
+			sum  += i;//sum(和)=sum+i;
+			i++;
+		}while(i<=0);
+		System.out.println(sum);//do{循环体}while（boolean表达式）;先执行循环体，再判断boolean表达式，若为true，
+		//继续执行循环体，否则终止，do{}while（）；至少执行一次循环。
+	}	
+
+}
+}
+
+

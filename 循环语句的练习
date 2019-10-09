@@ -1,0 +1,62 @@
+
+public class while语句的练习 {
+	public static void main(String[] args) {
+		int jishu = 0;
+		int oushu = 0;
+		int i = 1;
+		while(i<=100&&i>0) {
+			jishu = jishu+i;
+			i+=2;
+			System.out.print("奇数为："+i+"   奇数和为："+jishu);
+			System.out.println();
+		}System.out.println("奇数之和："+jishu);
+		for(int j = 2;j<=100;j+=2) {
+			 oushu = oushu+j;
+		}System.out.println("偶数之和："+oushu);
+		while(i<=100) {
+			if(i%2==0) {
+				oushu+=i;
+
+			}else {
+				jishu+=i;
+			}
+		}
+		System.out.println("100以内的奇数和为："+jishu);
+		System.out.println("100以内的偶数和为："+oushu);
+		System.out.println("***************************");
+
+	for(int k=1,  d=0;k<=100;k++){
+
+		if(k%5==0) {
+
+				System.out.print(k+"\t");
+				d++;
+				if(d==5) {
+					System.out.println();
+					d=0;
+				}
+
+		}
+	}System.out.println("%%%%%%%%%%%%%%%%%%%%%%%");
+	int s=1,f=0;
+	while(s<=100) {
+		if(s%5==0) {
+
+		System.out.print(s+"\t");
+	}s++;
+	f++;
+	while(f==25) {
+		System.out.println();
+		f=0;
+	}
+	}
+	System.out.println("九九乘法表");
+	for(int b=1;b<10;b++) {
+	for(int x=1;x<=b;x++) {
+		System.out.print(x+"*"+b+"="+x*b+"\t");
+	}
+	System.out.println();
+	}
+	}
+
+}
