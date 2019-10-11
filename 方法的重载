@@ -1,0 +1,35 @@
+//方法的重载只是相同方法名的不同方法；为了方便调用；
+public class 方法的重载 {
+	public static void main(String[] args) {
+		System.out.println(add(1,2));//参数的的个数不同构成重载；1和2对比
+		System.out.println(add(1,2,2));//参数的个数不同构成重载；
+		System.out.println(add(1.1,2));//参数的类型不同构成重载；1和3对比
+		System.out.println(add(2,1.1));//不同参数类型的位置不同构成重载；3和4对比
+		System.out.println(add(1,2,3));
+		add(1,2);
+		
+	}
+	 static int add(int a,int b,int c) {//在方法中使用static，可以直接调用方法，不用通过对象。
+		int sum = a+b+c;
+		return sum;
+	}public static int add(int a,int b) {
+		int sum = a+b;
+		System.out.println(sum);
+		return sum;
+		
+	}public static double add(double a,int b ) {
+		double sum = a+b;
+		return sum;
+	}public static double add(int a,double b) {
+		double sum = a+b;
+		return sum;
+	}/*public static int add(int b,int a) {   相同参数类型的位置不同不构成重载
+		int sum = a+b;
+		return sum;
+		
+	
+	}public static double add(int a,int b) {   只有返回值不同不构成数据的重载
+		double c = a+b;
+		return c;
+	}*/
+}
