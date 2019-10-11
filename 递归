@@ -1,0 +1,45 @@
+//在方法中我们可以调用别的方法，递归就是在方法中自己调用自己。
+public class 递归 {
+	public static void main(String[] args) {
+		a();
+		long d1 =System.currentTimeMillis();
+		
+		System.out.printf("%d阶乘的结果：%s%n",10,factorial(10));
+		long d2 = System.currentTimeMillis();//currentTimeMillis()为执行当前操作的时间。
+		System.out.printf("递归费时：%s%n",d2-d1);//两个时间相减即为执行递归所用的时间；
+		int j = 1;
+		for(int i = 10;i>1;i-=2) {//所有的递归能解决的问题都可以用循环来解决，但是循环比递归快的多！
+			j *= i*(i-1);
+			
+				
+			}System.out.println("10的阶乘为："+j);
+		}
+		
+	
+	static int count = 1;
+	static void a(){
+		
+		System.out.println("a");
+		count++;
+		if(count<10) {//使用递归必须有递归头和递归体构成，为了避免方法的无限调用；这里的if语句是递归体；递归体是为了解决
+			//什么时候调用自身方法，如果没有递归头，将陷入死循环！这里的方法被调用了9次。
+			a();//在方法中可以调用方法本身；
+			b();//在方法中可以调用别的方法；
+		}else {//这里的else语句是递归头，也就是方法结束的地方；递归头是为了解决什么时候不调用自身方法！虽然递归程序上看比较简单，
+			//但会占用大量系统堆栈，内存消耗大，在递归调用层次多时速度比循环慢的多，所以要慎用！
+			return;//return与break的区别，return是结束方法，只结束方法本身，break是结束程序，结束整个程序！
+			
+		}
+		
+		
+		}
+	static void b() {
+		System.out.println("我来了！！！");
+	}//10的阶乘；
+	static int factorial(int a) {
+		if(a ==1) {//递归头，什么时候不调用自己
+			return 1;
+		}else {//递归体，什么时候调用自己
+			return a*factorial(a-1);
+	}}
+	}
