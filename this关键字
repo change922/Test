@@ -1,0 +1,23 @@
+public class this的用法 {
+	int a;
+	int b;
+	int c;
+	 this的用法(int a,int b) {
+		this.a = a;//this，出现二义性的时候，避免就近原则，用this来区分成员变量和局部变量；
+		this.b = b;
+	}void Sing(){
+		
+		System.out.println("我想大声唱！！！");
+	} this的用法(int a,int b,int c){
+		//this的用法.a,无法使用这种方法调用成员变量；
+		this(a,b);//this可以将已赋值的成员变量的值直接赋值，避免了相同变量的重复赋值；
+		this.c = c;
+		
+	}void eat(){
+		this .Sing();//调用本类中的Sing方法；
+		
+	}
+	public static void main(String[] args) {//this 不能用于static方法中，方法区没有对象。
+		
+	}
+}
