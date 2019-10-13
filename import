@@ -1,0 +1,12 @@
+import static java.lang.Math.*;//import的静态方法导入。
+import cn.txt.javapackage;
+//import cn.txt.*;如果某些包下面多个类都要使用，可以直接“*”，意思是导入该包下所有的类，但是会略微降低编译速度，不会降低运行速度
+import java.util.Scanner;//可以同时导入多个多个包中的类，若多个包中的类名重名了，则需要手动输入位置。
+public class Import {
+	javapackage im = new javapackage();//这里也可以写成cn.txt.javapackage im = new cn.txt.javapackage();直接导入方便使用，如果
+	//类名重复就手动输入。
+	public static void main(String[] args) {
+		System.out.println(Math.PI);
+		System.out.println(PI);//导入了static java.lang.Math* 之后，就可以直接使用Math下的属性和方法了，不需要再写方法的位置了。
+	}
+}

@@ -1,0 +1,9 @@
+package cn.txt;//包必须是无注释的第一句，约定为域名倒着写，再加项目之类的。。。一般要打包，包的作用类似于文件夹，可以整理文件，避免
+//同名文件覆盖；cn.txt和cn.txt.car是两个不同的包，逻辑上是父子关系，实际上是两个不同的个体下面的类也属于不同的包。
+
+public class javapackage {
+	//System;//System是java.language下的类，java.lang包下面的类都是程序默认导入的，不需要人为导入
+public static void main(String[] args) {
+	
+}
+}
