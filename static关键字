@@ -1,0 +1,28 @@
+//static关键字，内存分析静态变量和静态方法；
+public class Static {
+	int id;
+	String name;
+	String pwd;
+	static String company ="应该有个公司！！！";//在类中，用static申明的成员变量为静态成员变量，也称为类变量，类变量的生命周期和
+	//类相同，在整个应用程序执行期间都有效。
+	public Static(int id,String name) {
+		this. id = id;
+		this.name = name;
+		
+		
+	}public void longin() {
+		printcompany();
+		System.out.println(company);
+		System.out.println("登录"+name);
+	}public static void printcompany(){
+		System.out.println(company);
+		
+	}public static void main(String[] args) {//static修饰的成员变量和方法，从属于类，普通变量和方法从属于对象。
+		Static u = new Static(101,"金山");//static修饰的方法只能调用方法区里的变量和方法；但是static修饰的方法可以被所有的方法调用，
+		//static修饰的方法和变量类似于图纸，而对象类似于实物，实物可以完成功能，图纸不行。
+		Static.printcompany();
+		Static.company = "bilibili天下第一";
+		Static.printcompany();
+	}
+
+}

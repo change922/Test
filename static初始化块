@@ -1,0 +1,14 @@
+public class Static初始化 {
+	int a;
+	int b;
+	static String  word = "这是啥！！";//静态初始化块执行顺序也是先执行父类的静态初始化，再执行子类的静态初始化块。存在着上溯的过程。
+	static {
+		System.out.println(word);
+		System.out.println("字符串串！！！");
+	}public static void printCompany() {
+		System.out.println(word);
+	}public static void main(String[] args) {
+		
+	}
+
+}
