@@ -1,0 +1,31 @@
+package cn.txt.oo;
+
+public class toString {
+	//Object obj;
+	public static void main(String[] args) {
+		toString ts = new toString();
+		
+		System.out.println(ts.toString());
+		Person2 ps = new Person2();
+		ps.person2("名字", 23);
+		System.out.println(ps.toString());
+				
+	}public String toString() {//toString方法的重写；
+		return "测试toString";
+		
+	}
+
+}class Person2{
+	public String toString() {
+		return name+"年龄"+age;
+
+
+	}String name;
+	int age;
+	public void person2(String name,int age) {
+		this.name = name;
+		this.age = age;
+		return;
+		
+	}
+}
