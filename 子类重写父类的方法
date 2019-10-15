@@ -1,0 +1,30 @@
+package cn.txt.oo;
+
+public class Methodoverride {
+	public static void main(String[] args) {
+			Horse h = new Horse();
+			h.run();
+	}
+	
+
+}
+class Vehicle{
+	public void run() {
+		System.out.println("跑。。。、");
+	}
+	public void stop() {
+		System.out.println("停");
+	}
+	public Person wholsPsg() {//这里的Student相当于是对象的类型
+		return new Person();
+	}
+	
+}class Horse extends Vehicle {//Horse继承了父类Vehicle,获得了父类的全部属性和方法，但是希望对其中的方法进行重写。
+	public void run() {//方法重写时，方法名，形参列表相同。“==”,
+		System.out.println("马蹄纷飞，嘚嘚嘚嘚");
+		
+	}public Person wholsPsg() {//Horse类继承了Vehicle类，所以这里的Person即返回值类型要小于等于Person,因为wholsPsg()
+		//方法也是继承的Vehicle.这里的Person也可以换成Student2但是不能换成Object.
+		return new Student2();//访问权限子类大于等于父类，(封装会细讲)。
+	}
+	}
