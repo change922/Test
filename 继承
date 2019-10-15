@@ -1,0 +1,42 @@
+package cn.txt.oo;//extends 意思为扩展，子类可以继承父类所有的属性和方法，构造方法除外，但是不见得能使用，隐私类的可能无法访问；
+//java的类继承
+//是单继承，只能继承一个类，端口是多继承的，多继承的系统难以维护，且过于复杂容易混乱；父类也称作基类，原生类，超类；如果定义一
+//个类时，没有调用extends则他的父类是java.lang.Object;
+
+public class extends1 {
+	public static void main(String[] args) {
+		Student stu = new Student();
+		stu.name ="金";
+		stu.age = 23;
+		Student2 stu2  = new Student2();
+		stu2.rest();
+		Person ps = new Person();
+		System.out.println(stu instanceof Student);
+		System.out.println(stu2  instanceof  Person);
+		//System.out.println(new Person() instanceof Student);
+		
+	}
+
+}class Person /*extends Object*/{
+	int age;
+	String name;
+	public void rest() {
+		System.out.println("休息一下！");
+	}
+}class Student{
+	int age;
+	String name;
+	public void rest() {
+		System.out.println("休息一下！");
+		
+		
+	}public void student() {
+		System.out.println("学习两小时！！");
+		
+	}
+}class  Student2 extends Person{
+	int id;
+	public void play() {
+		System.out.println("玩一会儿！！");
+	}
+}
