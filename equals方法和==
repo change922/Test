@@ -1,0 +1,61 @@
+package cn.txt.oo;
+// == 表示比较双方是否相等，如果是基本数据类型则表示值相等，如果是引用类型则表示地址相同，即是同一个对象；equals:Object类中
+//定义有public boolean equals(Object obj)方法，提供定义"对象类容相等"的逻辑。
+public class equals {
+	public static void main(String[] args) {
+		Object obj;
+		String str;
+		User u1 = new User(1000,"金","123");//  创建一个对象u1
+		User u2 = new User(1000,"js","111");//创建一个对象u2
+		System.out.println(u1.id+u1.name);
+		System.out.println(u1==u2);//判断u1和u2是否是同一个对象，也就是地址是否相等，结果为false;
+		System.out.println(u1 .equals (u2));//比较u1和u2的类容是否相同；结果为false；但是重写User类的equals方法后；
+		String str1 = new String("wo");//创建一个新的对象str1；
+		String str2 = new String("wo");//创建一个新的对象str2；
+		System.out.println(str1 == str2);//比较str1和str2是否是一个对象。
+		System.out.println(str1.equals(str2));//比较str1和str2的类容是否相同；
+		String str3 = "haha";//对String str3赋值为haha
+		String str4 = "haha";//对String str4赋值为haha
+		System.out.println(str3 == str4);//判断str3和str4是否是同一对象
+		System.out.println(str3.equals(str4));//判断str3和str4是否内容相同；
+				
+		
+	}
+
+}
+class User{
+	int id ;
+	String name;
+	String pwd;
+	public User(int id, String name, String pwd) {//使用eclipse的构造器功能构造方法；
+		super();
+		this.id = id;
+		this.name = name;
+		this.pwd = pwd;
+		
+		
+	}@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {//重写User类的equals方法，不同类的equals方法是不同的，都有可能被重写了。
+		if (this == obj)//如果两个对象是同一个对象，
+			return true;//直接返回ture
+		if (obj == null)//如果obj对象是空的，则不用比较了直接返回false；
+			return false;
+		if (getClass() != obj.getClass())//如果两个对象不属于同一个类，直接false；类是对象的模板，不同类的对象不同。
+			return false;
+		User other = (User) obj;//将输入对象强制转型。这里是重写User类的equals方法，所以强转成User类型。
+		if (id != other.id)//如果User的参数id不相等，返回false。
+			return false;
+		return true;//如果以上都通过了，则返回ture;
+	}
+
+
+}可以通过eclipse中的equals方法快捷键。
