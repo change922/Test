@@ -1,0 +1,58 @@
+
+public class 封装与访问控制符 {
+	protected int time;
+public static void main(String[] args) {
+	
+	Human h=new Human();
+	//h.age;private修饰的属性和方法只能在该类中被访问。
+	h.name="鸭子";//default修饰的属性和方法只能在同一个包内被调用。没有修饰词即默认为default。
+	//h.birthday;引用别的类时，需要为对象赋值。
+}
+}
+class Human{
+	private int age;
+    String name;
+    int birthday;
+	void say() {
+		System.out.println("嘟噜噜噜噜噜");
+		System.out.println(age);
+	}
+System.out.println("####################################")
+	
+}class Boy extends Human{
+	public void time() {
+		//age=33;子类继承了父类的所有方法和属性，构造方法除外，但是无法使用父类的私有属性。
+	}
+}
+
+
+public class 封装与访问控制符1 {
+	protected int age;
+	protected String name;
+	public void listen() {
+		System.out.println("且听风吟，御剑于心");
+	}
+	
+
+}
+
+System.out.println("####################################")
+import cn.txt.oo.封装与访问控制符1;
+
+public class 封装测试与访问控制符 {
+	public static void main(String[] args) {
+		//Human h=new Human();类前面也可以用修饰词修饰，Human的前面没加修饰词默认为default,
+		//只能在同一个包内被调用。所以这里无法使用。
+		
+		
+		
+	}
+
+}class Test extends 封装与访问控制符1{//调用不同包的类需要先导入。
+	{super.age=19;
+	}
+	public void t() {
+		name ="名字";//在子类中可以调用父类的protected修饰的属性和方法。
+	}
+	
+}
