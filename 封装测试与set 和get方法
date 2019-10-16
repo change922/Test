@@ -1,0 +1,43 @@
+public class 封装测试2 {
+	public static void main(String[] args) {
+		ceshi12 h4 = new ceshi12();
+		h4.setId(80);
+		
+	}
+
+}class ceshi12{
+	private int id;//属性用private修饰，调用时用set和get方法。其他的方法一般有public修饰，除非特殊要求；
+	private String name;
+	private int high;
+	private boolean man;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {//使用eclipse工具创建属性的set和get方法；
+		if(id<100&&id>0) {//使用set和get方法可以在不暴露属性的情况下对属性进行操作。
+		this.id = id;
+		System.out.println("正常");}
+		else {
+			System.out.println("请输入正确的id");
+		}
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		
+		this.name = name;
+	}
+	public int getHigh() {
+		return high;
+	}
+	public void setHigh(int high) {
+		this.high = high;
+	}
+	public boolean isMan() {
+		return man;
+	}
+	public void setMan(boolean man) {
+		this.man = man;
+	}
+}
