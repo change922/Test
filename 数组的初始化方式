@@ -1,0 +1,27 @@
+package cn.txt.oo;
+
+public class 数组的初始化方式 {
+	
+	int [] arr04 = {
+			1,2,2,//静态初始化，以{ }的方式，这个数组有3个值，分别是1,2，2。
+	};
+	User3 [] arr05 = {
+			new User3(100,"加油"),//引用类型的静态初始化，也是以{}的方式，这个数组有三个值
+			//分别是User3(100,"加油"）。User3(100,"加加油")。User3(100,"加加加油")
+			
+			new User3(100,"加加油"),
+			new User3(100,"加加加油") 
+			
+	};
+	int  c[] = new int[3];//默认初始化，数据类型为0；boolean类型为false;引用类型为null即所有的元素都为默认值；
+	public static void main(String[] args) {
+		int []arr06 = new int[10];//创建对象可以不用main方法做入口，但是调用对象的方法就需要在main内部了。
+		
+		
+		for(int i =0;i<arr06.length;i++) {//动态初始化，通过下标挨个赋值。
+			arr06[i]=2*i;
+			System.out.println(arr06[i]);
+		}
+	}
+
+}
