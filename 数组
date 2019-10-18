@@ -1,0 +1,39 @@
+package cn.txt.oo;
+
+public class 数组 {//数组是相同数据类型的有序集合，描述的是若干个相同类型的数据有序排列组合，其中每一个数据叫做一个元素，每一个
+	//元素都可以用索引（下标）来访问；
+	public static void main(String[] args) {
+		int[]arr01 =new int [10];//数组的写入格式：数组类型 [] 数组名称或数组类型 数组名称 [],	确定数组大小的方法new 数据类型 [数组数
+		//],索引的默认从0开始。
+		String arr02[]= new String[5];//创建一个String类型的名字为arr02的大小为5的数组，5表示数据的个数。
+		User3 []arr03= new User3[3];//引用数据类型在数组中存储的是地址，不是数据本身；
+		arr01[0]=10;
+		//arr01[199]=111;java.lang.ArrayIndexOutOfBoundsException,索引数字超出了范围；
+		arr02 [1]= "加油！！！";
+		for(int i=0;i<arr01.length;i++) {//数组的长度是确定的，一旦被创建，他的大小就是不可被改变的；
+			arr01[i]=i+10;                         //元素必须是相同类型，不可以出现混合类型。
+			System.out.println(arr01[i]);//数组类型可以是任何数据类型，包括基本类型和引用类型（数组中存储的是引用类型的地址。）
+														//数组也是对象，每个元素可以看成是成员变量。
+		}for(int i =0;i<arr01.length;i++) {//利用循环给数组赋值；
+			System.out.println(arr01[i]);//打印数组的值；
+			
+		}arr03[0]=new User3(1001,"金");//利用构造器给String类型的数组赋值；
+		arr03[1] = new User3(1002,"金小二");
+		arr03[2] = new User3(1003,"金小三");
+		System.out.println(arr03[2].name);//打印数据。
+				
+				
+	}
+
+	
+}class User3{
+	int id;
+	String name;
+	
+	public User3(int id, String name) {//构造器是不能定义返回值类型的，返回值一定是本类。
+		super();
+		this.id = id;
+		this.name = name;
+	}
+	
+}
