@@ -1,0 +1,29 @@
+package cn.txt.oo;
+public class 数组的遍历与foreach循环{
+	public static void main(String[] args) {
+		
+		int []a=new int[5];
+//初始化元素的值
+		for(int i=0;i<a.length;i++) {
+			a[i]=i*10;
+			//System.out.println(a[i]);为了步骤更清晰，赋值和打印分开写
+		}
+//打印数组的元素
+		for(int i=0;i<a.length;i++) {
+			System.out.println(a[i]);
+		}
+		System.out.println("###########################");
+//利用for-each循环打印数组元素
+		for(int f:a) {
+			System.out.println(f);//for-each循环只能打印元素但不能对元素值进行操作。
+		}
+		String ss[]= {
+				"大哥",
+				"二哥",
+				"三弟"
+		};//静态初始化需要；
+		for(String s:ss) {//使用for-each循环打印数组元素。
+			System.out.println(s);
+		}
+	}
+}
