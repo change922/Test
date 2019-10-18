@@ -1,0 +1,42 @@
+package cn.txt.oo;
+
+public class 多态和final {//多态的三要素，继承，方法的重写，父类引用指向子类对象。多态可以避免重复的重写方法，多态指的
+	//是方法的多态，不是属性，多态与属性无关。父类引用指向子类对象后，用该父类引用调用子类的方法，此时多态就出现了。
+	public static void main(String[] args) {
+		animals a = new animals();//引入animals类
+		animalsCry(a);//引用animalsCry方法,参数为a;
+		animals b = new dog();//子类转换成父类可以自动转换，
+		//b.seedoor
+		dog d = (dog)b;//强制转换，将父类转换为子类，将dog类型自动转为animals类型后，编译器认为b就是animals类型，b就无法调用
+		d.seedoor();//强制转换后就可以调用dog方法了。
+		//dog方法，若要调用dog方法需要强制转换为dog类型。
+		animals c = new cat();
+		//dog m = (dog)c;//虽然编译器可以将猫强制转换成狗，但是JVM无法运行。CastException意思是类型转换问题，cast表示转换。
+		//dog和cat是两个不同的子类对象无法互相转型。
+		a.shout();
+		animalsCry(new cat());//将父类animals指向子类cat，并引入cat类；
+		animalsCry(d);
+	}
+	static void animalsCry(animals a) {//构建animalsCry方法，参数类型为animals类型，参数为a,结构体为a的shout方法。
+		//这里的animal a是类信息，并不是对象，所以可以被调用。
+		a.shout();
+	}
+
+}/*final*/ class animals{//final修饰类时，不能被继承，比如String类，Math类等。
+	/*final */void shout() {//final修饰方法时，不能被重写。
+		System.out.println("叫了一声！！");//final修饰的变量不可以被改变，一旦赋了初值，就不能被
+		//重新赋值。
+	}//final int k;final修饰的变量必须被手动初始化。
+}class dog extends animals{
+	void shout() {
+		System.out.println("汪汪汪！！！");
+	}
+	void seedoor() {
+		
+	}
+}class cat extends animals{
+	 int i;//final int i=100;final修饰的变量必须手动初始化。
+	void shout() {
+		System.out.println("喵喵喵喵！！！");
+	}
+}
