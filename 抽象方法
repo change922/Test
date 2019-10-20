@@ -1,0 +1,23 @@
+//抽象方法指只有方法申明没有方法体的方法，用abstract修饰，有抽象方法的类是抽象类，继承抽象类的子类必须实现父类
+//的抽象方法。
+
+abstract public class 抽象方法{
+	abstract public void shout();
+	public static void main(String[] args)	{
+		Dog d = new Dog();
+		d.shout();
+	//	抽象方法 f=new 抽象方法();抽象方法没有实现只是规范无法被new。
+		
+	} 
+	
+		
+	
+}
+class Dog extends 抽象方法{//父类没有实现，子类必须实现。
+	public void shout() {
+		System.out.println("汪汪汪！！！");
+	}
+
+	
+	
+}

@@ -1,0 +1,86 @@
+//内部类分为成员内部类，匿名内部类，局部内部类。其中成员内部类又分为非静态内部类和静态内部类。
+public class TestOuterClass {
+	
+	public static void main(String[] args) {
+		
+		Outer.Inner i  = new Outer().new Inner();//非静态成员内部类内部类对象的创建依赖于外部类，就是说只要创建了
+		//内部类，必然外部类已经创建好了；
+		i.show();
+		
+	}
+
+}
+class Outer{
+	private int age = 10;
+	public void testOuter() {
+		
+	}
+	class Inner{//内部类可以调用外部类的属性和方法，但是外部类不能调用内部类的方法和属性，
+		int age = 20;//可以在内部类中创建属性age；
+		//非静态内部类不能有静态方法，静态属性和静态初始化块。
+		
+		
+		public void show() {
+			int age = 30;
+		System.out.println("外部类的成员变量age："+Outer.this.age);
+		System.out.println("内部类的成员变量age："+this.age);
+		System.out.println("方法的成员变量age："+age);
+		}
+	}
+}
+
+public class Test0uterStatic02 {
+	public static void main(String[] args) {
+		Outer2.Inner2 i2 = new Outer2.Inner2();//静态内部类不依赖外部类对象而存在，可以直接创建；
+
+	}
+
+}
+class Outer2{
+	int i;
+	static class Inner2{//静态内部类用static修饰；
+		void speak() {
+			//System.out.println(Outer2.this.i);有图纸不一定有对象，所以静态内部类无法调用外部类的属性和方法。
+		}
+
+	}
+}
+
+
+
+//匿名内部类适合于只用一次的类；
+public class TestAnonymousClass {
+	public static void test(AA a) {//创建实现方法
+		a.aa();
+	}
+	public static void main(String[] args) {
+		TestAnonymousClass.test(new AA() {//创建匿名内部类；直接new方法。也可以通过实现类达成同样的目的；
+
+			@Override
+			public void aa() {
+			System.out.print("TestAnonymousClass.main(....)new A()(...）aa()");
+			}
+
+		});
+
+
+
+	}
+
+}
+interface AA{//创建一个普通接口
+void aa() ;//抽象方法
+
+
+}
+class NiMing{
+	int age;
+	String name;
+	public NiMing(int age, String name) {
+		super();
+		this.age = age;
+		this.name = name;
+	}
+}
+
+局部内部类在方法内部几乎不用只作为了解即可。
