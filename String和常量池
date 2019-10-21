@@ -1,0 +1,21 @@
+public class String类常量池字符串比较 {
+	public static void main(String[] args) {
+		
+	String str = "abc";//创建字符串可以用“”。
+	String str1 = "abc"+"defg";//两个字符串相加还是字符串。
+	String str3 = "13"+12;//+是字符串连接符，结果是字符串。
+	String str4 = new String("def");//可以直接new对象。
+	System.out.println(str3);
+	System.out.println("#########");
+	
+	String str10 = "jin";//值计入赋值的字符串会被系统放到字符串常量池中，当再次出现该值时直接从常量池调用
+	String str11 = "jin";
+	String str12 = new String("jin");
+	System.out.println(str10 == str11);//同一个对象，==判断。直接赋值都在字符串常量池所以是同一对象。
+	System.out.println(str10 == str12);
+	System.out.println(str11.equals(str12));//一般用equals判断字符串。笔记时候两个字符串的类容。
+	
+
+	}
+}
+

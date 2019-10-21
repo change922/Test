@@ -1,0 +1,149 @@
+/*访问修饰符：只能是public或默认；接口名和类名采用相同命名机制；extends接口可以多继承；接口中的属性只能是常量
+ * 总是public static final修饰。不写也是。接口中的方法只能是public abstract，省略的话也是。
+ * 		子类通过implements来实现接口中的规范。
+ * 		接口不能创建实例，但可以用来声明引用变量类型
+ * 		一个类实现了接口，必须实现接口中所有的方法，并且这些方法只能是public的
+ * 		接口中只能包括静态常量，静态方法，抽象方法。
+ */
+
+public interface MyInterface {
+	/*public static final*/int MAX_AGE =100;
+	/*public abstract*/void test01();
+
+}
+class Myclass implements MyInterface{
+	void my() {
+		System.out.println("is me!!!!!");//实现类只要实现了接口中的方法即可，实现类也可以有自己的方法和属性。
+		System.out.println(MAX_AGE);
+	}
+	int i;
+	int MAX_AGE;//实现类可以调用接口中的常量。
+
+	
+	public void test01() {
+		System.out.println("嘎嘎嘎");
+		System.out.println(	MAX_AGE);
+		System.out.println("MyClass.test01()");
+		
+		
+	}
+	
+
+}
+
+接口和实现类
+public class TestInterface {
+	public static void main(String[] args) {
+		Angel a = new Angel();
+		a.fly();
+		a.helpother();
+		Honest h = new Angel();//接口不能new，但是可以new成实现类；
+		h.fly();//可以调用接口的方法
+		//h.helpother();编译器只认接口，接口中没有的方法无法调用；
+
+	}
+
+}
+interface volant{
+	/*public static final*/ int FLY_HEIGHT = 1000;//常量前面肯定有public static final ，不写也有
+	/*public  abstract */void helpother();//抽象方法前面有public abstract，不写也有。
+}
+interface Honest{
+	void fly();
+}
+class Angel implements volant,Honest{//实现类可以实现多个接口；
+
+	@Override
+	public void fly() {
+		System.out.println("灰呀灰");//抽象方法必须被重写。
+
+	}
+
+	@Override
+	public void helpother() {
+		System.out.println("帮助别人");
+
+
+	}
+
+}
+class GoodMan implements volant{
+
+	@Override
+	public void helpother() {
+	System.out.println();
+
+	}
+
+}
+class BirdMan implements Honest{
+
+	@Override
+	public void fly() {
+		System.out.println("我会飞");
+
+
+	}
+
+}
+
+接口之间的多继承
+public class TestInterface2 {
+
+}
+interface A{
+	int I=100;
+	void testa();
+}
+interface B{
+	void testb();
+}
+interface 	C extends A,B{//接口可以多继承，类只能单继承
+	void testc();//继承的接口可以有自己的方法
+
+}
+class Mytest implements A,B,C{
+
+
+	public void testc() {
+
+
+	}
+
+
+	public void testb() {
+
+	}
+
+
+	public void testa() {
+
+	}
+
+
+}
+ class MyTest implements C{
+	 public void my() {
+		 System.out.println(I);//接口继承后也会继承常量。
+	 }
+
+	@Override
+	public void testa() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void testb() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void testc() {
+		// TODO Auto-generated method stub
+
+	}
+
+}
+

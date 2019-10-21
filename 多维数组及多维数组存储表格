@@ -1,0 +1,74 @@
+import java.util.Arrays;
+
+public class Test2DimensionArray {//测试多维数组，这里是2维的，理论上讲可以无限的数组中包含数组，即数组的元素
+	//是数组。
+	public static void main(String[] args) {//main方法做为程序的入口；
+		Car[]cars = new	Car[2];//创建引用类型的数组需要提前定义
+		int a[] = new int[3];//定义一个名称为a大小为3的数组；
+		int b[][] = new int [4][];//因为数组的元素是数组，所以无法的多个元素数组的大小，只能给外面的数组定义大小；
+		int []d[]=new int[2][];
+		int k[]=new int[3];
+		b[0] =new int[] {1,2,3,};//挨个给作为元素的数组定义元素，注意b[0]=new int[2]{1,2}的写法不正确，已经知道了数组
+		//的元素，则数组的大小也定下来了，不需要再写出大小；
+		b[1] = new int[] {
+				2,4,4,5
+				
+		};
+		b[2]= null;
+		b[3] = new int [] {
+				88,666,222,999
+		};
+	System.out.println(b[1][3]);//这里指的是调用数组b中索引为1的数组，再调用它索引为3的元素；
+	System.out.println("#####################");
+	int c[][] = {//可以直接用静态初始化2维数组
+			{2,3,4,555,00},//第一个数组的元素为2,3,4,555,00，这里用“，”，表示并列，“；”则表示结束；
+			{22},
+			{11,00}
+};
+	System.out.println(c[0][1]);//调用2维数组中下标为0中的元素中下标为1的元素；
+	//System.out.println(Arrays.toString(c));//无法在一维的数组中使用toString方法打印二维数组的元素。
+	for(int[]temp:c) {//利用for-each循环打印元素。
+		System.out.println(Arrays.toString(temp));//打印的是temp不是c!!!!!
+	}
+	
+	}
+
+} 
+ class Car{//引用类型需要提前定义；
+	
+};
+
+存储表格
+
+import java.util.Arrays;
+//利用2维数组打印经典表格
+public class TestArrayTableDate {
+	public static void main(String[] args) {
+		/*Object temp[] []= {
+				 {1001,"金",18,"2005.11.02"},
+				 {1002,"金一",22,"2009.11.02"},
+				 {1003,"金二",33,"2018.11.02"}
+
+		};*///需要new2维数组的对象，否则没法打印一维数组的元素
+		Object[]emp1= {1001,"金",19,"2003.11.02"};//定义Object类型的数组emp1并用静态初始化的方式赋值，1001
+		//被编译器包装了，后面会学
+		Object[]emp2= {1002,"金一",22,"2009.11.02"};
+		Object[]emp3= {1003,"金二",33,"2020.11.02"};
+		/*Object[][]tabledate= {
+				{emp1},
+				{emp2},
+				{emp3}无法直接对一维数组使用Arrays.tostring方法，故而不能直接打印其中的元素；
+		};
+		System.out.println(Arrays.toString(tabledate));
+		for(Object[]temp:tabledate) {
+			System.out.println(Arrays.toString(temp));}*/
+		Object[][]tabledate= new Object[3][];//通过new对象的方式将emp1等的元素给tabledate数组
+		tabledate[0]= emp1;
+		tabledate[1]= emp2;
+		tabledate[2]= emp3;
+		for(Object[]temp:tabledate) {//利用foreach循环将tabledate中的元素打印出来
+			System.out.println(Arrays.toString(temp));
+		}
+	}
+
+}

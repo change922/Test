@@ -1,0 +1,46 @@
+public class TestArrayCopy {
+	public static void main(String[] args) {
+		String[] s1 = {"aa","bb","cc","dd","ee"};//创建一个元素为aa bb cc dd ee 的数组s1;
+		String[] s2 = new String[10];//创建一个大小为10的数组s2;
+		System.arraycopy(s1,2,s2,4,3);//将s1中的数组从下标为2的开始复制到s2中下标为4的元素上，复制四个元素。
+		String[]s3= {"阿里","B站","腾讯","京东","玄机"};
+		removeElment(s3,2);
+		addElment(s3,2,s1,0);
+		for(int i =0;i<s2.length;i++) {//利用数组的遍历打印出s2中的元素，数组的下标是从0开始的。所以要小于s2的长度。
+			System.out.println(i+"--"+s2[i]);
+		}System.out.println("###############");
+		
+		
+		System.arraycopy(s1, 3, s1, 2, 2);
+		for(int i =0;i<s1.length;i++) {
+			s1[s1.length-1]=null;
+			System.out.println(i+"--"+s1[i]);
+		}
+	/*	System.arraycopy(s3, 4, s3, s3.length-2,1);
+		for(int i =0;i<s3.length;i++) {
+			System.out.println(i+"--"+s3[i]);
+			s3[s3.length-1]=null;
+			
+		}*/
+		}
+	public static String[] removeElment(String[] s,int index) {//封装一个删除字符串类型数组s中下标为index的元素。
+		System.arraycopy(s, index+1, s, index,s. length-(index+1));//在数组s中从下标为index+1的元素开始拷贝到数组s
+		//中下标为index的位置，拷贝length-（index+1）个元素；看起来就像是删除了下标为index的元素。实际是被覆盖了
+		s[s.length-1]=null;//将最后有元素的位置赋值为空，个人觉得若留有空的元素位置因再减去空的个数。
+		for(int i =0;i<s.length;i++) {//利用数组的遍历打印出每个元素。
+			System.out.println(i+"--"+s[i]);
+		}return s;
+		
+	}public static String[] addElment(String[] ss,int add,String[] sss,int add1) {//创建一个添加一个元素的方法，大小足够。
+		System.arraycopy(ss, add,ss, add+1, ss.length-(add+1));//两个数组之间的关系，先将ss中将被添加的位置空出来
+		System.arraycopy(sss, add1, ss, add, 1);//再将sss中下标为add1的元素拷贝到ss中空出的位置；
+		for(int i =0;i<ss.length;i++) {
+			System.out.println(i+"--"+ss[i]);//数组遍历打印元素。
+			
+		}return ss;
+	}
+		
+		
+	}
+
+

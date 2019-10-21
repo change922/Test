@@ -1,0 +1,35 @@
+//匿名内部类适合于只用一次的类；
+public class TestAnonymousClass {
+	public static void test(AA a) {//创建实现方法
+		a.aa();
+	}
+	public static void main(String[] args) {
+		TestAnonymousClass.test(new AA() {//创建匿名内部类；直接new方法。也可以通过实现类达成同样的目的；
+
+			@Override
+			public void aa() {
+			System.out.print("TestAnonymousClass.main(....)new A()(...）aa()");
+			}
+			
+		});
+	
+		
+		
+	}
+
+}
+interface AA{//创建一个普通接口
+void aa() ;//抽象方法
+		
+	
+}
+class NiMing{
+	int age;
+	String name;
+	public NiMing(int age, String name) {
+		super();
+		this.age = age;
+		this.name = name;
+	}
+}
+

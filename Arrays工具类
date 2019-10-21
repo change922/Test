@@ -1,0 +1,18 @@
+import java.util.Arrays;//测试java.util.Arrays工具类的使用
+
+public class TestArrays {
+	public static void main(String[] args) {
+		int a []= {1,2,48,22,399,99,-11,-222};//用静态初始化的方式定义一个数组；
+		System.out.println(a);//直接打印a则得到的是a的位置；
+		System.out.println(Arrays.toString(a));//可以利用toString()方法打印出数组的元素。
+		Arrays.sort(a);//Arrays.sort()可以将数组的元素按从小到大的顺序排列，如果是自定义的则需要调用Comprable接口。
+		System.out.println(Arrays.toString(a));//将数组a中的元素打出来；
+		System.out.println(Arrays.binarySearch(a, 22));//通过2分法搜索数组a中是否有类容为22的元素，有就返回该元素的
+		//索引；
+		System.out.println(Arrays.binarySearch(a,- 999));//若没有则返回一个·负数。
+		System.out.println(Arrays.binarySearch(a, -11));//若元素为负数也返回该元素的下标。
+		
+		
+	}
+
+
