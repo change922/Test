@@ -1,0 +1,43 @@
+public class TestString2 {
+	public static void main(String[] args) {
+		
+		String s1 = "core Java";//从0到lenghth。
+		String s2 = "Core Java";
+		System.out.println(s1.charAt(1));//提取下标为1的字符。
+		//System.out.println(s1.charAt(-3));
+		System.out.println(s2.length());//返回s2的长度。
+		System.out.println(s1.equals(s2));//判断s1 和s2是否相等；
+		System.out.println(s1.equalsIgnoreCase(s2));//判断s1和s2是否相等，忽略大小写；
+		System.out.println(s1.indexOf("Java"));//字符串s1中是否包含Java,没有则返回-1，只返回第一个。
+		System.out.println(s1.indexOf("apple"));//字符串中是否包含apple.
+		System.out.println(s1.indexOf("a"));//查找对应字符串的位置。返回下标。
+		
+		
+		System.out.println("##########################");
+		//需要对String对象的内容进行修改时会创建新的对象，因为String对象是不可变字符序列。
+		String ss="";
+		String ss1=" How are you!!";
+		System.out.println(ss1.startsWith("How"));//判断ss1字符串是否是以字符串How开头的.
+		System.out.println(ss1.endsWith("you"));//判断ss1是否是以字符串you结尾的
+		System.out.println("####################");
+		ss=ss1.substring(1);//提取ss1中的字符串从下标为1的开始到结束。注意是创建了新的String对象，ss1本身并没有变化。
+		System.out.println(ss);
+		System.out.println(ss1);
+		ss=ss1.substring(2, 5);//提取ss1中的字符串从下标为2的开始到5结束，不包括5,[2,5).
+		System.out.println(ss);
+	    ss=ss1.toLowerCase();//全部转小写。
+	    System.out.println(ss);
+	    ss=ss1.toUpperCase();//全部转大写。
+	    System.out.println(ss);
+	    System.out.println("###############");
+	    ss=ss1.trim();//去除首尾的空格，中间的不会去。
+	    System.out.println(ss);
+	    System.out.println(ss1);
+	    String s = s1.replace(" ", "&");//将s1中的空格换成&，重新创建了对象。
+	    System.out.println("result is:"+s);//打印s.result,效果，结果，后果。
+		
+		
+	}
+	
+
+}
