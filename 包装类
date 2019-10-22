@@ -1,0 +1,25 @@
+
+public class TestWrappedClass {//测试包装类，byte为Byte,short为Short,long为Long,float为Float,double为Double,
+	//boolean为Boolean,int为Integer,char为Character.
+	public static void main(String[] args) {
+		//将基本数据类型转换为包装类
+		Boolean a1=Boolean.TRUE;
+		//Character j=Character.valueOf(j);
+		Integer a=new Integer(3);//基本数据类型转换成包装类可以用new对象的方法也可以用.valueof()的方法
+		Integer b =Integer.valueOf(29);
+		//将包装类对象转换成基本数据类型
+		int c=b.intValue();//将包装类转化成基本数据类型可以用.加数据类型Value()的方法；
+		double d=b.doubleValue();
+		System.out.println(c);//intValue();的括号不用输入值，转换的int类型的数是包装类的值。
+		//将字符串转换成包装类对象
+		Integer f=new Integer("1111");//将字符串转换为包装类可以用new Integer方法或Integer.parsrInt.
+		//Integer g = new Integer("111qqq"); 
+		Integer g= Integer.parseInt("22222");
+		//将包装类对象转换为字符串
+		String str =f.toString();//将包装类转化为字符串调用toString();
+		//常用的常量
+		System.out.println("int类型最大的整数："+Integer.MAX_VALUE);
+	}
+
+}
+

@@ -1,0 +1,29 @@
+import java.util.Arrays;//二分法寻找元素
+
+public class TestBinarySearch {
+	public static void main(String[] args) {
+		int arr[]= {2,30,3,9,4,6,299,39,20,10};
+		Arrays.sort(arr);//使用二分法寻找元素时必须先将数组元素按从小到大排序，二分法是通过比较寻找元素与中间元素的
+		//大小判断元素所在的区域；
+		System.out.println(Arrays.toString(arr));//打印排序好的arr数组；
+		int value=10;
+		System.out.println(myBinarySearch(arr,30));//调用myBinarySearch方法；
+	}
+		public static int myBinarySearch(int arr[],int value) {//封装一个二分法找元素的方法，需要两个端点；
+		int low =0;//起点的索引下标为low值为0；
+		int high=arr.length-1;//终点的下标为arr.length-1
+		while(low<=high) {//使用while循环，当low>high时结束循环；即最后low==high，若仍没有找到则不存在该元素；
+			int mid=(low+high)/2;//定义二分法的中间索引为low+high的一半，取模取整；
+			if(value==arr[mid]) {//判断寻找元素value的值是否等于arr[mid],若等于则直接返回mid，arr[mid]即为所找元素；
+				return mid;
+			}
+			if(value<arr[mid]) {//若value<arr[mid]则表示value可能存在于arr[low]和arr[mid-1]之中0
+				high=mid-1;//就可以使范围变为[arr[low]，arr[mid-1]],即high=mid-1；
+			}if(value>arr[mid]) {//若value>arr[mid],则可以判断value在arr[mid+1]和arr[high]；
+				low=mid+1;//所以low=mid+1；
+			}
+		}
+		return -1;}//若执行完上述所有循环仍然没有找到则返回-1；
+	
+
+}

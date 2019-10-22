@@ -1,0 +1,31 @@
+
+//冒泡排序及其优化
+import java.util.Arrays;
+
+public class TestBubbleSort {
+	public static void main(String[] args) {
+		int []values= {2,3,1,0,4,9,6, 8,5,7};//冒泡排序的比较顺序为从第一个开始，比较相邻的两个数，若前一个大于后一个
+		//则互换位置，再从第二个开始比较，只到全部比完。
+		for(int i=0;i<values.length-1;i++) {//length-1因为大小比索引大一
+		boolean flag=true;//定义一个boolean类型的常量，为后面优化做准备；
+		int temp =0;//定义中间变量方便后面数值互换；
+		for(int j =0;j<values.length-1-i;j++) {//利用嵌套循环来排序。
+			if(values[j]>values[j+1]) {//判断values[j]是否比values[j+1]的值大
+				temp=values[j];//先将values[j]的值赋给中间变量；
+				values[j]=values[j+1];//再将values[j+1]的值给values[j]
+				values[j+1]=temp;//再通过temp将原values[j]的值赋给values[j+1]
+				//System.out.println(Arrays.toString(values));也可以直接在这里打印，若没有数值的交换就不打印，只是看不到
+				//并不能真正的优化操作
+				flag=false;//若有数值的交换则输出flag为false；
+				
+			}
+			System.out.println(Arrays.toString(values));}//利用Arrays.toString方法打印数组values。
+	if(flag) {//内部程序可以调用外部数据，但不能直接使用，若前面的boolean flag放在外面程序会出错。
+			System.out.println("结束了！！！");//判断flag，若没有数值的交换则没有flag=false，flag为初始值true，执行中止；
+			break;
+		}System.out.println("###################");
+		
+			}
+		}
+	}
+

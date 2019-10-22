@@ -1,0 +1,22 @@
+public class TestAutoBox {
+public static void main(String[] args) {
+	Integer a=123;//Integer a=	Integer.valueof(123);实际是编译器为了操作简单而做了工作；
+	int b=a;//int b =a.intvalue();
+	Integer c=null;//对象为空
+	//int d=c;自动拆箱会报错，出现空指针的情况，空指针意味着调用了对象为null的方法，可以证明int d=c实际是int d
+	//=c.intValue();
+	System.out.println("##################");
+	//缓存[-128,127]之间的数字，系统初始化时创建一个叫Cache的缓存数组，当调用Valueof时先判断输入的值是否在[-128
+	//,127]之间，在则直接调用创建好的数组，并返回该数组，若不在则创建新的对象。
+	Integer i=Integer.valueOf(-128);
+	Integer m=-128;//Integer m=Integer.valueOf(-128)
+	System.out.println(i==m);//因为在[-128,127]内，所以是同一个对象。
+	System.out.println(i.equals(m));//equals比较的是对象的类容所以是相同的；
+	Integer k=1123;
+	Integer d=1123;
+	System.out.println(k==d);//范围不在[-128,127]之间，所以是不同的对象。
+	System.out.println(k.equals(d));
+	
+}
+}
+
