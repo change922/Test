@@ -23,7 +23,7 @@ public class TestBinarySearch {
 				low=mid+1;//所以low=mid+1；
 			}
 		}
-		return -1;}//若执行完上述所有循环仍然没有找到则返回-1；
+		return -1;}//若执行完上述所有循环仍然没有找到就返回-1；
 	
 
 }
