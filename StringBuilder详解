@@ -1,0 +1,64 @@
+String类中的append方法
+//测试可变字符序列和不可变字符序列的陷阱
+public class TestStringBuilder2 {
+	public static void main(String[] args) {
+		String str2=" ";//定义一个为null的字符串str2；
+		long num =	Runtime.getRuntime().freeMemory();//得到当前系统内存；
+		long time =System.currentTimeMillis();//测试当前程序运行的时间；
+		for(int i=0;i<4000;i++) {//用for循环创建了8000个对象，4000个str2和4000个i;
+			str2=str2+i;//工作中绝对不能出现这样的代码，一般写的是服务器程序会被访问和调用，如此占用资源的代码会拖垮
+			//程序；每访问一次就跑一次会产生很多多余的对象；
+
+		}long num1=Runtime.getRuntime().freeMemory();
+		long time1=System.currentTimeMillis();
+		System.out.println("循环占用的内存："+(num-num1));
+		System.out.println("循环消耗的时间："+(time1-time));
+		StringBuilder str=new StringBuilder("") ;//用StringBuilder来解决问题
+		long num3=Runtime.getRuntime().freeMemory();
+		long time3=System.currentTimeMillis();
+		for(int i=0;i<4000;i++) {
+			str.append(i);//直接调用StringBuilder的append方法延伸出所有的str对象；遇到多个字符延续的情况一般用StringBuilder;
+		}long num4=Runtime.getRuntime().freeMemory();
+		long time4=System.currentTimeMillis();
+		System.out.println("append占用的内存："+(num3-num4));
+		System.out.println("append消耗的时间："+(time4-time3));
+	}
+
+}
+
+
+String类中的常用方法
+
+public class TestStringBuilderAndBuffer {
+	public static void main(String[] args) {
+		StringBuilder sb=new StringBuilder();
+		for(int i=0;i<26;i++) {
+			/*sb.append((char)('a'+i));*///sb.append((char)('a'+i))和下面的作用相同，只是看着别扭；
+			char temp =(char)('a'+i);
+			sb.append(temp);//StringBuilder的append（）方法延续后面的字符串；append意思是附加延续；对同一个字符串
+			//的类容进行更改，本质上是同一个对象。没有创建新的对象。
+			System.out.println(sb.append(temp));
+
+
+		}
+		System.out.println(sb);
+		System.out.println(sb.indexOf("e"));//indexOf()寻找sb中是否有e字符；
+		System.out.println(sb.substring(2, 5));//substring()打印sb中下标为2到下标为5-1的字符；
+		System.out.println(sb.charAt(2));//charAt()打印sb中下标为2的字符；
+		sb.setCharAt(2, '金');//CharAt替换sb中下标为2的字符；
+		System.out.println(sb);
+		sb.reverse();//reverse（）倒叙sb字符串；
+		System.out.println(sb);
+		sb.insert(2, '我').insert(5, '的').insert(19, '天');//insert（）字指定的下标处插入字符，只要返回的return this，就可以
+		//链式调用；
+		System.out.println(sb);
+		System.out.println(sb.replace(1, 5, "哈哈哈"));//replace（）替换从1到5-1的下标的字符为“哈哈哈”；
+		sb.delete(2, 4);//delete（）删除下标从2到下标为4-1的字符；
+		System.out.println(sb);
+
+	}
+
+}
+
+
+

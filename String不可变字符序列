@@ -1,0 +1,27 @@
+public class TestString {
+	public static void main(String[] args) {
+		String str= "aaabbb";//String类是final修饰的类，所以一旦初始化时被赋值就不能修改
+		System.out.println(Integer.toHexString(str.hashCode()));
+		System.out.println(str);
+		String str1=str.substring(2, 4);//运用字符串的substring方法截取str的类容，但其实是重新生产了一个str1的字符串；
+		//包前不包后；
+		str= "qqq";//重新赋值实际上是创建了新的String对象
+		System.out.println(Integer.toHexString(str.hashCode()));//比较两个str的hash码可以看出他们是不同对象、
+		System.out.println(str);
+		System.out.println(str1);
+		System.out.println(str==str);
+		System.out.println(str.equals(str));
+		String str2= "hello"+"world";//编译器会自动优化代码"hello"+"world"="helloworld"
+		String str3="helloworld";
+		String str4= "hello";
+		String str5= "world";
+		String str6=str4+str5;//编译时不知道变量str4和str5中储存的是什么，所以没法在编译的时候优化；
+		System.out.println(str2==str3);//ture
+		System.out.println(str2==str6);//false
+		System.out.println(str2.equals(str3));//ture
+		System.out.println(str2.equals(str6));//ture
+		//通常比较String类型都用equals方法；
+		
+	}
+
+}
