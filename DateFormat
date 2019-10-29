@@ -1,0 +1,32 @@
+//测试抽象类DateFormat和实现类SimpleDateFormat的使用；
+import java.text.DateFormat;//Ctrl+shift+o快捷导入包；
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class TestDateFormat {
+	public static void main(String[] args) throws ParseException {
+		//利用format方法将时间对象转换成固定格式的字符串；
+		DateFormat df=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");//y代表年M代表月份d代表天数，字符的个数
+		//代表着数字的个数，如MM意味着有两位数的月份；中间的连接符可以换但代表年月日一类的字符不能换；
+		String str=df.format(new Date(900000000));//利用format方法将时间对象转换成字符串对象；
+		System.out.println(str);
+		String str1=df.format(new Date());
+		System.out.println(str1);
+		DateFormat df2=new SimpleDateFormat("yyyy年MM月dd日 hh时mm分ss秒");//利用实现类SimpleDateFormat
+		//写出规范的格式；
+		Date da=df2.parse("2014年2月22日 11时33分55秒");//必须按照规范的格式写字符串才能转换成时间对象；
+		System.out.println(da);
+		DateFormat df3=new SimpleDateFormat("D");//利用SimpleDateFormat方法实现某一时刻是所在年份的第多少天的格式；
+		Date date =df3.parse("2014");//当格式转换成D即按天计算，则parse后的数字则为1970年1月1日加上对应数字天数所指的
+		//时间。
+		String str3=df3.format(new Date());
+		//String str4=df3.format(new Date());
+		
+		System.out.println(date);
+		System.out.println(str3);
+		//System.out.println(str4);
+		
+	}
+
+}

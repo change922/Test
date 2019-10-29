@@ -1,0 +1,35 @@
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+
+public class TestFile {
+	public static void main(String[] args) throws IOException {
+
+		File f=new File("E:/a.txt");//创建一个File对象；
+		System.out.println(f);
+		f.renameTo(new File("E:\\bb.txt"));//调用renameTo方法修改文件名称
+		System.out.println(System.getProperty("user.dir"));//	getProperty方法获得属性，获得use.dir用户目录属性在eclipse
+		//中为项目路径；
+		File f1=new File("gg.txt");//创建一个新的名为gg.txt的对象；
+		f1.createNewFile();//将这个对象显示出来；不添加路径即为默认路径；路径在new文件对象时设置。
+		System.out.println(f1.exists());//判断File对象f1是否存在；
+		System.out.println(f1.isDirectory());//判断f1是否是目录，是则输出true，否则为false；
+		System.out.println(f1.isFile());//判断f1是否是文件；
+		System.out.println(new Date(f1.lastModified()));//f1最后的修改时间；
+		System.out.println(f1.length());//f1的大小；
+		System.out.println(f1.getName());//f1的文件名；
+		System.out.println(f1.getPath());//获得f1的相对路径，相对于当前目录；
+		System.out.println(f1.getAbsolutePath());//获得f1的绝对路径；
+		//f1.delete();删除文件；
+		File f2=new File("E:/地球/月球/太阳");
+		//f2.createNewFile();
+		//boolean flag=f2.mkdir();//目录结构中只要有一个不再则不会创建；
+		boolean flag =f2.mkdirs();//只要路径存在就会创建；
+		System.out.println(f2);
+	}
+
+
+
+}
+

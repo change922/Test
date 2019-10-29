@@ -1,0 +1,95 @@
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+public class TestCalendar {
+	public static void main(String[] args) {
+		
+		
+		Calendar c=new GregorianCalendar(2111,7,6,22,45,25);//创建时间类对象，格式GregorianCalendar源码可查；
+		Calendar c1=new GregorianCalendar(2111,7,6,10,45,25);
+		//通过get方法获得时间类对象的元素；
+		int year =c.get(Calendar.YEAR);//获得年；
+		int month=c.get(Calendar.MONTH);//0为1月，11为12月；
+		int date =c.get(Calendar.DAY_OF_MONTH);//当月的第多少天；
+		int hour =c.get(Calendar.HOUR_OF_DAY);//hour of day表示24时计时法；
+		int hour1=c1.get(Calendar.HOUR);//hour是12时计时法；
+		int weekday=c.get(Calendar.DAY_OF_WEEK);//星期几，1为星期天，7为星期六；
+		System.out.println(year);
+		System.out.println(month);
+		System.out.println(date);
+		System.out.println(hour);
+		System.out.println(hour1);
+		System.out.println(weekday);
+		//通过set方法设置相关的元素；
+		Calendar c2=new GregorianCalendar();
+		c2.set(Calendar.YEAR,9999);//当方法的对象有year一类的词时，需要Calendar.否则不需要；
+		System.out.println(c2);
+		c2.set(5000, 11, 25);
+		System.out.println(c2);
+		c2.set(Calendar.HOUR, 21);
+		System.out.println(c2);
+		//通过add方法进行日期的计算；
+		Calendar c3=new GregorianCalendar();
+		c3.add(Calendar.YEAR, 100);//通过add方法进行计算。
+		System.out.println(c3);
+		c3.add(Calendar.YEAR,-200);//减法可以用负数表示；
+		System.out.println(c3);
+		//日期对象和时间对象的转化
+		Calendar c4=new GregorianCalendar();
+		Date d=c4.getTime();//时间对象转换成日期类；
+		c4.setTime(new Date());//通过set方法直接得到日期类的时间；
+		printCalendar(c4);
+		printCalendar(c2);
+	}
+	public static void printCalendar(Calendar c) {
+		int year=c.get(Calendar.YEAR);
+		int month=c.get(Calendar.MONTH);
+		int date=c.get(Calendar.DAY_OF_MONTH);
+		int hour=c.get(Calendar.HOUR);
+		int minute=c.get(Calendar.MINUTE+1);
+		int second =c.get(Calendar.SECOND);
+		int weekday=c.get(Calendar.DAY_OF_WEEK);
+		String s="";
+		switch (weekday) {
+		case 0 :
+			s="日";
+			
+			
+			break;
+		case 1:
+			s="一";
+			break;
+		case 2:
+			s="二";
+			break;
+		case 3:
+			s="三";
+			break;
+		case 4:
+			s="四";
+			break;
+		case 5:
+			s="五";
+			break;
+		case 6:
+			s="六";
+			break;
+			
+			
+			
+			
+
+		default:
+			break;
+		}
+		System.out.println(year+"年"+month+"月"+date+"日 "+hour+"时"+minute+"分"+second+"秒     "+"周"+s
+		);	
+	}
+	
+	
+
+}
+
+
+

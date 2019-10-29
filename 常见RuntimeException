@@ -1,0 +1,45 @@
+import java.lang.reflect.Array;
+
+/**
+ *所有异常的根类为java.lang.Throwable,其子类分为Error (错误，重启虚拟机)。Exception(异常)，异常分为CheckedExcep
+ *tion(已检查的异常)；RuntimeException(UncheckException)运行时异常；
+ * 	CheckedException在编译器中处理
+ *RuntimeException运行时抛出，一般为逻辑错误。
+ */
+
+public class TestException {//RuntimeException测试
+		public static void main(String[] args) {
+			int a=0;//异常，除数不能为0；ArithmeticException,算数错误。
+			int b=1;
+			if(a!=0) {
+				
+				System.out.println(b/a);
+			}
+			String s=null;//NullPointerException空指针异常，通常为调用了对象为空的方法和属性；
+			if(s!=null) {
+				
+				s.length();
+			}
+			Animals d=new Dog();//	ClassCastException强制转型异常
+			if(d instanceof Cat){//instanceof 判断实例是否相等
+				
+				Cat c=(Cat)d;
+			}
+			String h[]=new String[3];
+			int l=5;
+			if(l<h.length) {
+				
+				System.out.println(h[l]);//ArrayIndexOutOfBoundsException数组越界异常，当索引值大于数组大小就会出现
+			}
+			String g= "123abc";
+		//	Integer n=Integer.parseInt(g);NumberFormatException,因为g不是单纯的数字所以无法转换成Integer类型；
+			}
+
+}
+class 	Animals{
+	
+}class Dog extends Animals{
+	
+}class Cat extends Animals{
+	
+}

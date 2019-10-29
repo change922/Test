@@ -1,0 +1,48 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Scanner;
+
+public class TestCalendar2 {
+	public static void main(String[] args) throws ParseException {
+		System.out.println("请输入日期，格式：2002,1,22");
+		Scanner scanner=new Scanner(System.in);
+		//System.out.println(scanner.nextInt());
+		String str=scanner.nextLine();//定义str类型的时间对象；连接符必须和日历对象的模板保持一致，这里用的,则下面也用,
+		DateFormat df=new SimpleDateFormat("yyyy,MM,dd");//使用DateFormat方法的实现类SimpleDateFormat
+		//创建日历对象的模板；
+		Date date=df.parse(str);//通过parse方法获得时间对象；
+		//System.out.println(date);
+		Calendar c=new GregorianCalendar();
+		c.setTime(date);//通过setTime将时间对象转换成日期对象。
+		int day=c.get(Calendar.DAY_OF_MONTH);
+		int days=c.getActualMaximum(Calendar.DATE);
+		c.set(Calendar.DAY_OF_MONTH, 1);//给时间对象c赋值；
+		
+		System.out.println("日\t一\t二\t三\t四\t五\t六");
+		for(int i=0;i<c.get(Calendar.DAY_OF_WEEK)-1;i++) {//利用循环将日历前面的部分打印为制表符，因为不是每个月
+			//的1号都是星期日，所以需要把日历刚好推到星期所在的地方，因为星期数比实际的数字小1所以要-1；
+			System.out.print("\t");}
+			
+			for(int i=0;i<days;i++) {//利用for循环打印日历
+				if(day==c.get(Calendar.DAY_OF_MONTH)) {
+					System.out.print(c.get(Calendar.DAY_OF_MONTH)+"*\t");
+				}else {  
+					
+					System.out.print(c.get(Calendar.DAY_OF_MONTH)+"\t");//可以直接打印c的日历对象；
+				}
+			if(c.get(Calendar.DAY_OF_WEEK)== Calendar.SATURDAY/*或者直接输入数字7*/){
+				System.out.println();//通过if条件语句判断换行
+			}
+			c.add(Calendar.DAY_OF_MONTH, 1);//每次循环都让day of month的值加1；
+			
+			
+		}
+	}
+	
+
+}

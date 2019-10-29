@@ -1,0 +1,41 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+
+public class Test02 {
+	public static void main(String[] args) {
+		FileReader reader=null;
+		try {//通关try语句块将可能发生的异常包起来
+			reader=new FileReader("E:/a.txt") ;//因为源码中FileReader就是被抛出的，所以使用时需要处理；
+			System.out.println("step1");
+			char c1=(char)reader.read();//try语句块可以包含多个语句；
+			System.out.println(c1);
+			System.out.println("step2");
+		} catch (FileNotFoundException  e) {//利用catch捕获异常。文件没有找到异常
+			System.out.println("step3");
+			
+			e.printStackTrace();//调用e的printStackTrace()方法打印异常信息；
+		} catch (IOException e) {//每个catch只能捕获一个异常，子类异常在父类前面，如这里的FileNoteFoundException
+			//是IOException的子类，如果父类在前，父类也可以处理子类的异常，子类的catch永远不会被调用；
+			
+			e.printStackTrace();
+		}finally {//一个try{}catch{}语句
+		//只能有一个finally，程序执行到语句块1如果发生异常则直接执行语句块1的catch语句
+			//然后执行finally语句块，并不会执行语句块2；因为调用了E盘的文件所以不管怎样都需要结束。
+			System.out.println("step4");
+			try {
+				if(reader!=null) {//加判断避免空指针异常；
+					
+					reader.close();//因为close()也是被抛出的所以也需要try{}catch{}语句捕获；
+				}
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+		}
+	}
+
+}
+
+

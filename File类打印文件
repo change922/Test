@@ -1,0 +1,32 @@
+* 利用递归打印目录树；
+ */
+
+
+import java.io.File;
+
+public class TestFileTree {
+	public static void main(String[] args) {
+		File f=new File("E://KuGou");//创建File对象f
+		printfile(f,0);//调用printfile方法；
+		
+		
+	}
+	
+
+	static void printfile(File file,int level) {//创建printfile方法，int level是计数器
+		for(int i=0;i<level;i++) {//通过计数器来建立文件之间的联系；
+			System.out.print("-");
+		}
+		System.out.println(file.getName());//打印出file的名字；
+		if(file.isDirectory()) {//判断file是否是目录；
+		//printfile(file.getName());无法直接调用printfile()方法，因为参数类型不同，file.getNme()是String类型，但方法
+			//参数是File类型；
+			File []files=file.listFiles();//file.listFiles()是数组；
+			for(File temp:files) {//利用数组进行遍历
+				printfile(temp,level+1);//因为temp是File类型，所以可以调用printfile（）方法；
+			}
+			
+		}
+	}
+
+}

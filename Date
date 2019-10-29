@@ -1,0 +1,26 @@
+import java.util.Date;//导入时间类；
+
+public class TestDate {
+	
+
+
+	public static void main(String[] args) {
+		
+		Date a=new Date();//创建一个Date对象，Date()括号类导入的是从1970年1月1日0：00输入时间的毫秒数，不输入则
+		//默认为当前时间。
+		System.out.println(a);
+		Date b=new Date(2003);//输入一个毫秒数；
+		System.out.println(b);
+		System.out.println(a.getTime());//调用a的getTime()方法获得时间对象a的时间，
+		System.out.println(a.after(b));//调用after（）方法判断a的时间是否在b之后，
+		//遇到日期类问题是要Calendar类解决；
+		
+		
+		
+	}
+
+	
+		
+	}
+
+
