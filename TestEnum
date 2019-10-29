@@ -1,0 +1,37 @@
+/**
+ * 测试枚举 
+ * @author Administrator
+ *枚举用于构建多个常量，均是用public static final修饰，不建议使用枚举的高级特性。
+ */
+
+public class TestEnum {
+	public static void main(String[] args) {
+		System.out.println(Season.SPRING);//可以直接打印枚举的对象
+		Season s= Season.AUTUMN;//因为是静态对象，可以直接引用
+		switch (s) {//枚举常用与switch语句
+		case SPRING:
+			System.out.println("春天到了，又到了动物们交配的季节了");
+			break;
+		case SUMMER:
+			System.out.println("夏天到了，又到了秀身材的季节了");
+			break;
+		case AUTUMN:
+			System.out.println("秋天到了，瓜果飘香");
+			break;
+		case WINTER:
+			System.out.println("冬天到了，雨雪霏霏");
+			break;
+
+		default:
+			break;
+		}
+		
+	}
+
+}
+enum Season{//枚举的结构为enum 名称 {}，类容通常全部大写；
+	SPRING,SUMMER,AUTUMN,WINTER
+}
+enum Week{
+	SUNDAY,MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY
+}
