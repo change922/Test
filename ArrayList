@@ -1,0 +1,316 @@
+public class SxtArrayList01 {
+	private Object[]elementData;
+	private int size;
+	private static final int DEFALT_CAPACITY =10;
+
+
+public SxtArrayList01() {
+	 elementData=new Object[DEFALT_CAPACITY];
+	
+	}
+public SxtArrayList01(int capacity) {
+	elementData=new Object[capacity];
+	
+}
+public void add(Object obj) {
+
+	elementData [size++]=obj;//添加新元素，size变大，这里的size是索引下标的意思。
+	
+}
+
+public String toString() {//重新toString方法
+	StringBuilder sb=new StringBuilder();
+	sb.append("[");
+	/*for(Object obj:elementData) {
+		sb.append(obj+",");
+		//system.out.print(obj);如果用这个换掉sb.append（）方法会先执行打印再执行
+		//append方法
+	}
+	sb.append("]");*/
+	for(int i=0;i<size;i++) {
+		sb.append(elementData[i]+",");
+	}
+	sb.setCharAt(sb.length()-1, ']');//setCharAt(int，char),后面是单引号，字符串类型。
+	
+	return sb.toString();
+	
+	
+}
+public static void main(String[] args) {
+	SxtArrayList01 s=new SxtArrayList01(40);//调用方法其实是通过构造器创建对象再调用的
+	s.add("aa");
+	s.add("bb");
+	System.out.println(s);
+	for(int i=0;i<30;i++) {
+		s.add("金"+i);
+	}
+	System.out.println(s);
+	
+}
+
+}
+
+
+数组扩容
+
+public class SxtArrayList02 {
+	private Object[]elementData;
+	private int size;
+	private static final int DEFALT_CAPACITY =10;
+
+
+public SxtArrayList02() {
+	 elementData=new Object[DEFALT_CAPACITY];
+
+	}
+public SxtArrayList02(int capacity) {
+	elementData=new Object[capacity];
+
+}
+public void add(Object obj) {//这里的obj相当于所要添加元素的形参
+	//什么时候扩容
+	if(elementData.length==size) {//当数组的长度和元素的下标相等时就需要扩容
+		Object newarray[]=new Object[elementData.length+(elementData.length>>1)];//创建一个新的Object类型的数组
+		//将数组的大小扩大到elementData.length+elementData.length/2,位于运算速度最快，向右移一位除2，这里加法的
+		//优先级高于位于运算，所以需要将位与运算括起来
+		System.arraycopy(elementData, 0, newarray, 0,elementData.length );//数组扩容后将原数组的类容拷贝到新数组。
+		elementData=newarray;//再将新数组的类容赋给原数组，其实是位置的引用
+	}
+	elementData [size++]=obj;
+}
+
+public String toString() {//重新toString方法
+	StringBuilder sb=new StringBuilder();
+	sb.append("[");
+	/*for(Object obj:elementData) {
+		sb.append(obj+",");
+		//system.out.print(obj);如果用这个换掉sb.append（）方法会先执行打印再执行
+		//append方法
+	}
+	sb.append("]");*/
+	for(int i=0;i<size;i++) {
+		sb.append(elementData[i]+",");
+	}
+	sb.setCharAt(sb.length()-1, ']');//setCharAt(int，char),后面是单引号，字符串类型。
+
+	return sb.toString();
+
+
+}
+public static void main(String[] args) {
+	SxtArrayList02 s=new SxtArrayList02();//调用方法其实是通过构造器创建对象再调用的
+	s.add("aa");
+	s.add("bb");
+	System.out.println(s);
+	for(int i=0;i<30;i++) {//利用for循环同时添加多个元素。
+		s.add("金"+i);
+
+	}System.out.println(s);
+
+}
+
+}
+
+ * 添加get和set方法，并检查索引是否合法。
+ * @author Administrator
+ *
+ */
+
+public class SxtArrayList03<E> {//创建泛型。
+	private 	Object[]elementData;
+	private int size;
+	private static final int DEFALT_CAPACITY =10;
+
+
+public SxtArrayList03() {
+	 elementData=new Object[DEFALT_CAPACITY ];
+
+	}
+public SxtArrayList03(int capacity) {//判断创建的容器容量是否合法
+	if(capacity<0) {//当capacity<0时，
+		throw new RuntimeException("容器容量不能为负数"+capacity);//手动抛出异常
+	}else if(capacity==0) {//等于时
+		elementData=new Object[DEFALT_CAPACITY ];//创建容量为10的容器。
+	}else {
+	elementData=new Object[capacity];//capacity合法时传多少输出多少。
+	}
+}
+public void add(E obj) {//这里的obj相当于所要添加元素的形参
+	//什么时候扩容
+	if(elementData.length==size) {//当数组的长度和元素的下标相等时就需要扩容
+		Object newarray[]=new Object[elementData.length+(elementData.length>>1)];//创建一个新的Object类型的数组
+		//将数组的大小扩大到elementData.length+elementData.length/2,位于运算速度最快，向右移一位除2，这里加法的
+		//优先级高于位于运算，所以需要将位与运算括起来
+		System.arraycopy(elementData, 0, newarray, 0,elementData.length );//数组扩容后将原数组的类容拷贝到新数组。
+		elementData=newarray;//再将新数组的类容赋给原数组，其实是位置的引用
+	}
+	elementData [size++]=obj;
+}public E get(int index) {
+	/*if(index<0||index>size-1) {//判断索引是否合法，&&逻辑或两边为真则为真否则假，||逻辑与，一边为真则为真。
+		throw  new RuntimeException("索引不合法"+index);//手动抛出异常。
+	}*/
+	CheakRange(index);
+	return (E)elementData[index];
+}
+public E set(E element,int index) {//创建set方法、
+	CheakRange(index);
+	elementData[index]=element;
+	return element;
+
+}
+
+public String toString() {//重新toString方法
+	StringBuilder sb=new StringBuilder();
+	sb.append("[");
+	/*for(Object obj:elementData) {
+		sb.append(obj+",");
+		//system.out.print(obj);如果用这个换掉sb.append（）方法会先执行打印再执行
+		//append方法
+	}
+	sb.append("]");*/
+	for(int i=0;i<size;i++) {
+		sb.append(elementData[i]+",");
+	}
+	sb.setCharAt(sb.length()-1, ']');//setCharAt(int，char),后面是单引号，字符串类型。
+
+	return sb.toString();
+
+
+}
+public void CheakRange(int index) {//创建检查下标的方法。
+	if(index<0||index>size-1) {
+		throw new RuntimeException("索引不合法"+index);
+	}
+
+}
+public static void main(String[] args) {
+	SxtArrayList03 s=new SxtArrayList03();//调用方法其实是通过构造器创建对象再调用的
+	s.add("aa");
+	s.add("bb");
+	System.out.println(s);
+	for(int i=0;i<30;i++) {//利用for循环同时添加多个元素。
+		s.add("金"+i);
+
+	}
+	s.set("kkk", 4);
+	System.out.println(s);
+	System.out.println(s.get(29));
+	//SxtArrayList03 s1=new SxtArrayList03(-1);容器容量不能为负
+
+}
+
+}
+
+
+/**
+ * 添加remove方法。
+ * @author Administrator
+ *
+ */
+
+public class SxtArrayList04<E> {//创建泛型。
+	private 	Object[]elementData;
+	private int size;
+	private static final int DEFALT_CAPACITY =10;
+
+
+public SxtArrayList04() {
+	 elementData=new Object[DEFALT_CAPACITY ];
+
+	}
+public SxtArrayList04(int capacity) {//判断创建的容器容量是否合法
+	if(capacity<0) {//当capacity<0时，
+		throw new RuntimeException("容器容量不能为负数"+capacity);//手动抛出异常
+	}else if(capacity==0) {//等于时
+		elementData=new Object[DEFALT_CAPACITY ];//创建容量为10的容器。
+	}else {
+	elementData=new Object[capacity];//capacity合法时传多少输出多少。
+	}
+}
+public void add(E obj) {//这里的obj相当于所要添加元素的形参
+	//什么时候扩容
+	if(elementData.length==size) {//当数组的长度和元素的下标相等时就需要扩容
+		Object newarray[]=new Object[elementData.length+(elementData.length>>1)];//创建一个新的Object类型的数组
+		//将数组的大小扩大到elementData.length+elementData.length/2,位于运算速度最快，向右移一位除2，这里加法的
+		//优先级高于位于运算，所以需要将位与运算括起来
+		System.arraycopy(elementData, 0, newarray, 0,elementData.length );//数组扩容后将原数组的类容拷贝到新数组。
+		elementData=newarray;//再将新数组的类容赋给原数组，其实是位置的引用
+	}
+	elementData [size++]=obj;
+}public E get(int index) {
+	/*if(index<0||index>size-1) {//判断索引是否合法，&&逻辑或两边为真则为真否则假，||逻辑与，一边为真则为真。
+		throw  new RuntimeException("索引不合法"+index);//手动抛出异常。
+	}*/
+	CheakRange(index);
+	return (E)elementData[index];
+}
+public E set(E element,int index) {//创建set方法、
+	CheakRange(index);
+	elementData[index]=element;
+	return element;
+
+}
+public void remove(E element) {
+	for(int i=0;i<=size;i++) {
+		if (element.equals(elementData[i])) {//此处若写成elementData[i].equals(element)会出现空指针的的异常。因为
+			//elementData[i]可能为空，所以不行。
+			remove(i);//直接调用写好的remove方法。
+
+		};
+}
+}
+public void remove(int index) {
+	System.arraycopy(elementData, index+1, elementData, index, elementData.length-1-index);//删除本质是数组的拷贝
+
+	/*elementData[elementData.length-1]=null;
+	size--;*/
+	elementData[--size]=null;//这里的size=elementData.length-1,--size是先自减在赋值，相当于先将elementData[size]
+	//=null,再size--；每添加一个元素size都会+1，所以实际的size==length
+
+}
+
+public String toString() {//重新toString方法
+	StringBuilder sb=new StringBuilder();
+	sb.append("[");
+	/*for(Object obj:elementData) {
+		sb.append(obj+",");
+		//system.out.print(obj);如果用这个换掉sb.append（）方法会先执行打印再执行
+		//append方法
+	}
+	sb.append("]");*/
+	for(int i=0;i<size;i++) {
+		sb.append(elementData[i]+",");
+	}
+	sb.setCharAt(sb.length()-1, ']');//setCharAt(int，char),后面是单引号，字符串类型。
+
+	return sb.toString();
+
+
+}
+public void CheakRange(int index) {//创建检查下标的方法。
+	if(index<0||index>size-1) {
+		throw new RuntimeException("索引不合法"+index);
+	}
+
+}
+public static void main(String[] args) {
+	SxtArrayList04 s=new SxtArrayList04();//调用方法其实是通过构造器创建对象再调用的
+	s.add("aa");
+	s.add("bb");
+	System.out.println(s);
+	for(int i=0;i<30;i++) {//利用for循环同时添加多个元素。
+		s.add("金"+i);
+
+	}
+	s.set("kkk", 4);
+	System.out.println(s);
+	System.out.println(s.get(29));
+	//SxtArrayList03 s1=new SxtArrayList03(-1);容器容量不能为负
+	s.remove("金"+3);
+	System.out.println(s);
+	System.out.println(s.size);
+
+}
+
+}
+

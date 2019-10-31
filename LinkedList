@@ -1,0 +1,412 @@
+
+public class Node {//Node表示节点的意思。
+	Node previous;//上一个节点
+	Node next;//下一个节点
+	Object element;//元素数据
+	public Node(Node previous, Node next, Object element) {
+		super();
+		this.previous = previous;
+		this.next = next;
+		this.element = element;
+	}
+	public Node(Object obj) {//第一次添加数据时没有上一个和下一个，所以需要创建只有元素本身的构造方法
+		super();
+		this.element = obj;
+	}
+
+}
+
+public class SxtLinkedList01 {
+	private Node first;//第一个元素,previous表示上一个元素。
+	private Node last;//最后一个元素。next表示下一个元素。
+	private int size;
+
+	public void add(Object obj) {
+		Node node=new Node(obj);
+		if(first==null) {//当创建的元素为第一个时，也就是上一个节点为空时。
+			first=node;
+			last=node;
+
+		}/*else {
+			first=last;
+			last=null;
+			first=node;
+		}*/
+		else {
+			node.previous=last;//传入第二个和以后的元素时，上一个节点previous
+			//为last；
+			node.next=null;//后面没有元素，所以下一个节点为null。
+			last.next=node;//程序进行到这，开始加入第三个元素，上一个元素的
+			//下一个节点为node;
+			last=node;//导入第三个
+
+		}size++;//每添加一个数则数组的长度+1、
+	}@Override
+	public String toString() {
+		StringBuilder sb=new StringBuilder("[");//通过StringBuilder方法创建字符串对象sb
+		Node temp=first;//创建节点temp，并为其赋值为first。
+		while(temp!=null) {//利用循环打印元素。因为是通过节点找元素，所以无法使用数组的遍历。
+			//System.out.print(temp.element+",");//也可以直接打印temp中的元素。
+		    sb.append(temp.element+",");//调用StringBuilder的append方法打印元素。
+			temp=temp.next;//打印之后，temp就被赋值为temp的下一个元素，即temp.next，循环直到temp.next为空，即
+			//temp为空、
+		}sb.setCharAt(sb.length()-1, ']');//setCharAt(int,char),后面是char类型，用' ';
+		return sb.toString();//必须返回sb.toString()，否则将不会打印。
+
+	}
+	public static void main(String[] args) {
+		SxtLinkedList01 list=new SxtLinkedList01();
+		list.add("aa");
+		list.add("bb");
+		list.add("cc");
+		System.out.println(list);
+
+	}
+
+}
+
+public class SxtLinkedList02 {
+	private Node first;//第一个元素,previous表示上一个元素。
+	private Node last;//最后一个元素。next表示下一个元素。
+	private int size;
+
+	public void add(Object obj) {
+		Node node=new Node(obj);
+		if(first==null) {//当创建的元素为第一个时，也就是上一个节点为空时。
+			first=node;
+			last=node;
+
+		}/*else {
+			first=last;
+			last=null;
+			first=node;
+		}*/
+		else {
+			node.previous=last;//传入第二个和以后的元素时，上一个节点previous
+			//为last；
+			node.next=null;//后面没有元素，所以下一个节点为null。
+			last.next=node;//程序进行到这，开始加入第三个元素，上一个元素的
+			//下一个节点为node;
+			last=node;//导入第三个
+
+		}size++;//每添加一个元素则数组的长度+1、
+	}@Override
+	public String toString() {
+		StringBuilder sb=new StringBuilder("[");//通过StringBuilder方法创建字符串对象sb
+		Node temp=first;//创建节点temp，并为其赋值为first。
+		while(temp!=null) {//利用循环打印元素。因为是通过节点找元素，所以无法使用数组的遍历。
+			//System.out.print(temp.element+",");//也可以直接打印temp中的元素。
+		    sb.append(temp.element+",");//调用StringBuilder的append方法打印元素。
+			temp=temp.next;//打印之后，temp就被赋值为temp的下一个元素，即temp.next，循环直到temp.next为空，即
+			//temp为空、
+		}sb.setCharAt(sb.length()-1, ']');//setCharAt(int,char),后面是char类型，用' ';
+		return sb.toString();//必须返回sb.toString()，否则将不会打印。
+
+	}
+	public 	Object  get(int index) {//创建get方法
+		Node temp=null;//提前创建Node类型对象temp
+		if(index<0 || index>size-1) {//判断下标是否正确
+			throw new RuntimeException("索引不合法："+index);//如果不正确则抛出异常
+		}
+			if(index<=(size>>1)) {//为了提高效率，当索引值小于等于数组元素个数的一半时从头开始找，size>>1位运算除以2.
+
+				temp=first;//使创建的Node对象temp的值为first，在这为"aa",下标为0，则下标为1的元素为first.next即为temp.next
+				//是“bb”,同理下标为2的元素为temp.next.next.可以使用循环按照下标来寻找元素，
+				for(int i=0;i<index;i++) {//利用for循环查找元素。
+					temp=temp.next;
+				}
+			}else {//反之则从最后开始找
+				temp=last;//所以令temp=last
+				for(int i=size-1;i>index;i--) {//	利用for循环查找元素。
+					temp=temp.previous;//temp.previous表示上一个元素、
+				}
+			}
+		return temp.element;//打印元素的类容。
+	}
+
+	public static void main(String[] args) {
+		SxtLinkedList02 list=new SxtLinkedList02();
+		list.add("aa");
+		list.add("bb");
+		list.add("cc");
+		list.add("dd");
+
+		System.out.println(list);
+		System.out.println(list.get(2));
+		System.out.println(list.get(3));
+
+
+	}
+
+}
+ 
+ /**
+ * 实现remove方法和封装get方法。
+ * @author Administrator
+ *
+ */
+public class SxtLinkedList03 {
+	private Node first;//第一个元素,previous表示上一个元素。
+	private Node last;//最后一个元素。next表示下一个元素。
+	private int size;
+
+
+	public void add(Object obj) {
+		Node node=new Node(obj);
+		if(first==null) {//当创建的元素为第一个时，也就是上一个节点为空时。
+			first=node;
+			last=node;
+
+		}/*else {
+			first=last;
+			last=null;
+			first=node;
+		}*/
+		else {
+			node.previous=last;//传入第二个和以后的元素时，上一个节点previous
+			//为last；
+			node.next=null;//后面没有元素，所以下一个节点为null。
+			last.next=node;//程序进行到这，开始加入第三个元素，上一个元素的
+			//下一个节点为node;
+			last=node;//导入第三个
+
+		}size++;//每添加一个元素则数组的长度+1、
+	}@Override
+	public String toString() {
+		StringBuilder sb=new StringBuilder("[");//通过StringBuilder方法创建字符串对象sb
+		Node temp=first;//创建节点temp，并为其赋值为first。
+		while(temp!=null) {//利用循环打印元素。因为是通过节点找元素，所以无法使用数组的遍历。
+			//System.out.print(temp.element+",");//也可以直接打印temp中的元素。
+		    sb.append(temp.element+",");//调用StringBuilder的append方法打印元素。
+			temp=temp.next;//打印之后，temp就被赋值为temp的下一个元素，即temp.next，循环直到temp.next为空，即
+			//temp为空、
+		}sb.setCharAt(sb.length()-1, ']');//setCharAt(int,char),后面是char类型，用' ';
+		return sb.toString();//必须返回sb.toString()，否则将不会打印。
+
+	}
+	public 	Object  get(int index) {//创建get方法
+
+		if(index<0 || index>size-1) {//判断下标是否正确
+			throw new RuntimeException("索引不合法："+index);//如果不正确则抛出异常
+		}
+		Node temp=getNode(index);//直接调用getNode方法。
+
+		return (temp!=null)?temp.element:null;//打印元素的类容。
+			}
+
+	public Node getNode(int index) {
+		Node temp=null;//将节点的值初始化为空。
+
+
+		if(index<=(size>>1)) {//为了提高效率，当索引值小于等于数组元素个数的一半时从头开始找，size>>1位运算除以2.
+
+			temp=first;//使创建的Node对象temp的值为first，在这为"aa",下标为0，则下标为1的元素为first.next即为temp.next
+			//是“bb”,同理下标为2的元素为temp.next.next.可以使用循环按照下标来寻找元素，
+			for(int i=0;i<index;i++) {//利用for循环查找元素。
+				temp=temp.next;
+			}
+		}else {//反之则从最后开始找
+			temp=last;//所以令temp=last
+			for(int i=size-1;i>index;i--) {//	利用for循环查找元素。
+				temp=temp.previous;//temp.previous表示上一个元素、
+			}
+	}return temp;
+		}
+	public void remove(int index) {
+		Node temp=getNode(index);//创建将要删除的对象为temp
+		Node up=temp.previous;//创建所要删除的上一个节点为up
+		Node down=temp.next;//创建所要删除的下一个节点为down
+		if(temp!=null) {
+			if(up!=null) {//当up=null,即temp.previous=null,temp是第一个元素，删掉之后up的值还是null，不需要执行下面的代码
+				up.next=down;//本来up=temp.previous.则up.next=temp.previous.next.即为temp本身，但删除temp后，up.next=temp
+				//.next,即为down，重新连接。
+				}
+			if(down!=null) {//当down=null时，即删除的是最后一个元素，down的值还是null，不用执行下面的代码。
+
+				down.previous=up;//同理·，temp=temp.previous。
+			}
+			if(index==0) {//当index==0时，即temp=first时,
+				first=down;//down=temp.next，即first=temp.next,可以看出，首个元素从temp变成了temp.next，即第一个元素
+				//删除了、
+			}
+			if(index==size-1) {//当index==size-1时，即temp=last时
+				last=up;//up=temp.previous,即last=temp.previous，最后一个元素变成了上一个元素，即最后的元素被删除了、
+			}
+
+
+			size--;//因为删除了一个元素，所以元素的个数要减一。
+
+		}
+	}
+	public static void main(String[] args) {
+		SxtLinkedList03 list=new SxtLinkedList03();
+		list.add("aa");
+		list.add("bb");
+		list.add("cc");
+		list.add("dd");
+
+		System.out.println(list);
+		System.out.println(list.get(2));
+		System.out.println(list.get(3));
+		list.remove(3);
+		System.out.println(list);
+		list.remove(0);
+		System.out.println(list);
+
+
+	}
+
+}
+
+/**
+ * 实现remove方法和封装get方法。
+ * @author Administrator
+ *
+ */
+public class SxtLinkedList04<E> {
+	private Node first;//第一个元素,previous表示上一个元素。
+	private Node last;//最后一个元素。next表示下一个元素。
+	private int size;
+	public void getindex(int index) {
+		if(index<0||index>size-1) {
+			throw new RuntimeException("索引不合法："+index);
+
+	}}
+
+	public  void add(int index,E element) {//指定位置插入元素。
+
+			getindex(index);
+			Node newnode =new Node(element);//创建需要插入的元素,Alt+shift+r重构
+			Node temp=getNode(index);//得到被插入的元素
+			Node up=temp.previous;
+			Node down=temp.next;
+			if(up!=null) {//当up不为空时，即插入的位置不是第一个时、
+
+				up.next=newnode;//将temp的上一个节点的下一个节点从temp变成newnode.
+				newnode.previous=up;//将newnode的上一个节点设置为up.
+			}
+			//if(down!=null) {//并不需要判断这种情况。
+				temp.previous=newnode;//插入元素的上一个节点变成newnode
+				newnode.next=temp;//newnode的下一个节点变成temp.
+			//}
+		  if(index==0) {//当插入位置为第一个元素时
+				first=newnode;//直接令first(第一个元素)=newnode.
+			}
+			if(index==size-1) {//当插入的位置是最后一个元素时
+				last.previous=newnode;//(last)最后一个元素的上一个元素为newnode、
+				newnode.next=last;//新元素的下一个为最后一个元素。
+				//加在最后是特殊情况，可以直接调用之前的add方法。
+
+			}size++;//添加了新元素，size++；
+
+
+		}
+
+
+	public void add(E elememt) {
+		Node node=new Node(elememt);
+		if(first==null) {//当创建的元素为第一个时，也就是上一个节点为空时。
+			first=node;
+			last=node;
+
+		}/*else {
+			first=last;
+			last=null;
+			first=node;
+		}*/
+		else {
+			node.previous=last;//传入第二个和以后的元素时，上一个节点previous
+			//为last；
+			node.next=null;//后面没有元素，所以下一个节点为null。
+			last.next=node;//程序进行到这，开始加入第三个元素，上一个元素的
+			//下一个节点为node;
+			last=node;//导入第三个
+
+		}size++;//每添加一个元素则数组的长度+1、
+	}@Override
+	public String toString() {
+		StringBuilder sb=new StringBuilder("[");//通过StringBuilder方法创建字符串对象sb
+		Node temp=first;//创建节点temp，并为其赋值为first。
+		while(temp!=null) {//利用循环打印元素。因为是通过节点找元素，所以无法使用数组的遍历。
+			//System.out.print(temp.element+",");//也可以直接打印temp中的元素。
+		    sb.append(temp.element+",");//调用StringBuilder的append方法打印元素。
+			temp=temp.next;//打印之后，temp就被赋值为temp的下一个元素，即temp.next，循环直到temp.next为空，即
+			//temp为空、
+		}sb.setCharAt(sb.length()-1, ']');//setCharAt(int,char),后面是char类型，用' ';
+		return sb.toString();//必须返回sb.toString()，否则将不会打印。
+
+	}
+	public 	Object  get(int index) {//创建get方法
+
+		if(index<0 || index>size-1) {//判断下标是否正确
+			throw new RuntimeException("索引不合法："+index);//如果不正确则抛出异常
+		}
+		Node temp=getNode(index);//直接调用getNode方法。
+
+		return (temp!=null)?(E)temp.element:null;//打印元素的类容。
+			}
+
+	public Node getNode(int index) {
+		Node temp=null;//将节点的值初始化为空。
+
+
+		if(index<=(size>>1)) {//为了提高效率，当索引值小于等于数组元素个数的一半时从头开始找，size>>1位运算除以2.
+
+			temp=first;//使创建的Node对象temp的值为first，在这为"aa",下标为0，则下标为1的元素为first.next即为temp.next
+			//是“bb”,同理下标为2的元素为temp.next.next.可以使用循环按照下标来寻找元素，
+			for(int i=0;i<index;i++) {//利用for循环查找元素。
+				temp=temp.next;
+			}
+		}else {//反之则从最后开始找
+			temp=last;//所以令temp=last
+			for(int i=size-1;i>index;i--) {//	利用for循环查找元素。
+				temp=temp.previous;//temp.previous表示上一个元素、
+			}
+	}return temp;
+		}
+	public void remove(int index) {
+		Node temp=getNode(index);//创建将要删除的对象为temp
+		Node up=temp.previous;//创建所要删除的上一个节点为up
+		Node down=temp.next;//创建所要删除的下一个节点为down
+		if(temp!=null) {
+			if(up!=null) {//当up=null,即temp.previous=null,temp是第一个元素，删掉之后up的值还是null，不需要执行下面的代码
+				up.next=down;//本来up=temp.previous.则up.next=temp.previous.next.即为temp本身，但删除temp后，up.next=temp
+				//.next,即为down，重新连接。
+				}
+			if(down!=null) {//当down=null时，即删除的是最后一个元素，down的值还是null，不用执行下面的代码。
+
+				down.previous=up;//同理·，temp=temp.previous。
+			}
+			if(index==0) {//当index==0时，即temp=first时,
+				first=down;//down=temp.next，即first=temp.next,可以看出，首个元素从temp变成了temp.next，即第一个元素
+				//删除了、
+			}
+			if(index==size-1) {//当index==size-1时，即temp=last时
+				last=up;//up=temp.previous,即last=temp.previous，最后一个元素变成了上一个元素，即最后的元素被删除了、
+			}
+
+
+			size--;//因为删除了一个元素，所以元素的个数要减一。
+
+		}
+	}
+	public static void main(String[] args) {
+		SxtLinkedList04<String> list=new SxtLinkedList04<>();
+		list.add("aa");
+		list.add("bb");
+		list.add("cc");
+		list.add("dd");
+
+		System.out.println(list);
+		System.out.println(list.get(2));
+		System.out.println(list.get(3));
+		list.add(0, "金山");
+		System.out.println(list);
+		list.add(4, "嘎嘎");
+		list.add(5, "哈哈");
+		System.out.println(list.get(2));
+
+
+	}
+
+}
