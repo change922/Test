@@ -1,0 +1,96 @@
+/**Map是常用的接口，存储方式是以键值对的方式，
+ * HashMap是Map的实现类。
+ */
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class TestMap {
+	public static void main(String[] args) {
+		Map<Integer,String> m1=new HashMap<>();//创建HashMap对象，Integer为值的类型，String为键的类型。键值对的
+		//类型不一定相同，当创建键值对时，键和值就关联起来。
+		m1.put(1, "first");//调用m1对象的put方法，添加新的键值对对象。
+		m1.put(2, "second");
+		m1.put(3,"third");
+		
+		
+		System.out.println(m1.get(1));//通过调用m1的get方法，通过调键来调值。
+		System.out.println(m1.containsKey(2));//调用containsKey方法，查找是否有对应的键。底层是equals方法、
+		System.out.println(m1.isEmpty());//isEmpty方法判断m1是否为空
+		System.out.println(m1.remove(3));//删除指定键位的值
+		System.out.println(m1.size());//判断m1有多少个元素。
+		System.out.println(m1.containsValue("first"));//查找是否有first的值、
+		Map <Integer,String> m2=new HashMap<>();
+		m2.put(4, "四");
+		m2.put(5,"五");
+		m2.put(1,"one");//键值对中的键是唯一的，如果重复则新的会覆盖旧的。
+		m1.putAll(m2);//利用putAll方法将m2中的元素全部添加到m1中
+		System.out.println(m1);
+		m1.put(2, "two");//相同的键新的会覆盖旧的。
+		System.out.println(m1);
+		
+		
+	}
+
+}
+
+
+引用数据类型举例
+import java.util.HashMap;//Ctrl+shift+o,快速导入没导入的包。
+import java.util.Map;
+
+public class TestMap2 {
+
+	public static void main(String[] args) {
+		Employee e1=new Employee(101,"金山",3000);
+		Employee e2=new Employee(102,"二弟",4000);
+		Employee e3=new Employee(103,"三弟",5000);
+		Map <Integer,Employee>m1=new HashMap<>();//创建Map对象。
+		m1.put(101,e1);//利用键值对将数据保存。
+		m1.put(102, e2);
+		m1.put(103, e3);
+		Employee emp=m1.get(101);//创建Employee对象emp,为了简洁。
+		System.out.println(emp.getEname());//可以直接用emp的getEname方法。
+		System.out.println(m1.get(102).getSalary());//也可以多次调用来解决，不创建Employee
+		System.out.println(m1);//通过重写的toString方法直接打印m1.
+
+
+	}
+	}
+
+	class 	Employee{//Alt+shift+r,重构。创建新的类，Employee雇员。
+		private int id;//工号
+		private String ename;//名字
+		private double salary;//薪水
+		public String toString() {
+			return "id:"+id+"Ename:"+ename+"salary:"+salary+"  ";//重写toString()方法。toString()方法中不能使用转义字符。
+			//位置无关
+		}
+		public int getId() {//创建相应的get()和set()方法。
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public String getEname() {
+			return ename;
+		}
+		public void setEname(String ename) {
+			this.ename = ename;
+		}
+		public double getSalary() {
+			return salary;
+		}
+		public void setSalary(double salary) {
+			this.salary = salary;
+		}
+		public Employee(int id, String ename, double salary) {//创建构造方法。
+			super();
+			this.id = id;
+			this.ename = ename;
+			this.salary = salary;
+		}
+
+
+	}
+

@@ -1,0 +1,300 @@
+/**
+ * HashMap底层原理：数组加链表的结构，位桶数组（一般是table），数组中的元素为链表
+ * @author Administrator
+ * 
+ *1：获得key对象的hashcode,调用hashcode()方法，获得hashcode，数据是以hashcode的
+ *形式存储在计算机中的，hashcode是一个整数。
+ *2：根据hashcode计算出hash值（要求在0，数组长度-1）之间。用&或者%运算，目的是将数据
+ *尽可能均匀的分布。
+ *3：生成Entry对象，Entry对象包括key对象，value对象，hash值，指向下一个对象的引用
+ *（节点）
+ *4：将Entry对象放到table数组中，如果数组中还没有元素，则直接放入，如果有Entry对象，
+ *则将已有Entry对象的next指向新的Entry,形成链表。
+ */
+
+public class TestHashMap {//定义TestHashMap类。
+	int size;//size为数组的元素个数、
+	Node2 table[];//定义table位桶数组。
+	public TestHashMap() {
+		table=new Node2[16];//确定table数组的大小和元素类型。
+		
+	}
+	//创建get方法。
+	public Object get(Object key) {
+		//先通过key值获得对应的hash值，方便寻找位桶数组的位置。
+		int hash=myHash(key.hashCode(),table.length);
+		
+		Object value=null;
+		//如果table[hash]为null，则该位置没有元素，直接返回value
+		if(table[hash]!=null) {
+		Node2 temp=table[hash];//取第一个节点temp.
+		//当temp不为空时比较对应的key值，利用遍历来比较
+		while(temp!=null) {
+			//如果temp节点的key值和传入的key值相等则temp的value即为所求。
+			if(temp.key.equals(key)) {
+				value=temp.value;
+				break;
+			}else {//不相等则比较下一个
+				temp=temp.next;
+			}
+			
+		}
+		}
+	
+		return value;
+		}
+	//创建put方法。
+	public void put(Object key,Object value) {
+		//完整的put方法还需要考虑数组扩容问题。
+		
+		Node2 newnode =new Node2();//创建Node对象。
+		newnode.hash=myHash(key.hashCode(),table.length);//为newnode对象的成员变量
+		//赋值、
+		newnode.key=key;
+		newnode.value=value;
+		newnode.next=null;
+		boolean keyRepeat=false;//创建boolean对象，
+		Node2 iterlast=null;//创建Node2对象，保存temp值。
+		Node2 temp=table[newnode.hash];//将Node节点和table数组联系起来。
+		if(temp==null) {//判断table数组对应位置是否为空。
+			table[newnode.hash]=newnode;//若为空则直接将newnode放在该位置。
+		}else {//若不为空则需要链表形式添加newnode。
+			
+		//当temp不为空时，利用while循环，挨个比较key的值，若有相同则覆盖。
+			while(temp!=null) {
+				//若key的值相同就覆盖。
+				if(temp.key.equals(key)) {
+					System.out.println("key值重复了");
+					keyRepeat=true;//如果发生重复则将keyRepeat的值变为true。
+					temp.value=value;//直接将value值赋给temp即可，其他值不变。
+				break;
+				//key值不重复，遍历下一个。
+				}else {
+					iterlast=temp;//用iterlast保存temp的值。
+					temp=temp.next;//遍历新的temp的下一个对象。
+					
+				}
+			}
+			if(!keyRepeat) {//若没有发生重复则keyRepeat的值为默认的false，!keyRepeat=true;执行下面的语句。若发生重复
+			//则keyRepeat的值在前面被改为true，!keyRepeat=false,不执行下面的语句，若没有这个判断，则每次循环完都会
+				//执行iterlast.next=newnode,若key值重复则iterlast值为默认的null，iterlast.next会空指针。
+			iterlast.next=newnode;//当temp.next=null时，退出循环，此时的temp的值为null，如果不用iterlast保存前一个
+			//temp的值而直接用temp.next=newnode;会出现空指针的情况。
+				
+			}
+			}
+
+	
+			
+				
+			}
+	//重写toString方法打印数据
+	public String toString() {
+		//创建StringBuilder对象。
+				StringBuilder sb=new StringBuilder("{") ;
+				//利用for循环遍历位桶数组中的元素
+				for(int i=0;i<table.length;i++) {
+					Node2 temp=table[i];
+					//使用循环遍历元素中的链表
+					while(temp!=null) {//while循环多用于boolean条件的循环，for则多用于范围内的循环。
+						sb.append(temp.key+":"+temp.value+",");
+						temp=temp.next;
+						
+					}
+				}sb.setCharAt(sb.length()-1,'}');
+				return sb.toString();
+				
+			}
+			
+		
+	
+	public  static int myHash(int v,int length) {//添加myHash方法，v为键对象的hashcode值，数据是
+		//以一串数字的形式存储在计算机中，这串数字就是hashcode
+//		System.out.println("hash myhash:"+(v&(length-1)));//通过按为与运算取得hash值，
+//		//int类型的数据&运算其实是将数据的二进制码进行与运算，1为真，0为假。
+//		System.out.println("hash myhash:"+(v%(length-1)));//直接进行取余运算。
+		return v&(length-1);//无论是与运算还是取余，都是为了将数据跟分散的放在数组中。
+		//效率来讲与运算高于取余。
+	}
+	
+	
+
+	public static void main(String[] args) {
+		TestHashMap t=new TestHashMap();
+		t.put(10, "aa");//调用put方法，已经将链表的雏形构建出来了。用不同算法算出的hash值
+		//不一定相同，hash值的目的是尽量均匀的分散数据。
+		t.put(20, "bb");
+		t.put(30,"cc");
+		t.put(10, "sssss");//测试key值重复时是否覆盖,key值相同则key.hashCode也相同。
+		System.out.println(t);
+		//利用for循环找出具有相同hash值的key.hashCode值。
+		//for(int i=10;i<100;i++) {
+			//System.out.println(i+"---"+myHash(i,16));//静态方法内部的方法只能调用静态方法，所以需要将myHash()方法改为static方法
+		//需要用字符串将输出变成字符串，否则输出为i+myHash(i,16)的值。26 42 58Ctrl+z撤销上一步操作。
+		//}
+		//测试相同hash值的对象是否被分到同一个链表中。
+		t.put(26, "hhh");
+		t.put(42, "ggg");
+		t.put(58, "ddd");
+		System.out.println(t);
+		//Object h=26;int类型是基本数据类型，不是对象，没有方法
+		//Object g=42;数字的hashCode就是数字本身。
+		//System.out.println(h+"---"+h.hashCode());
+		//System.out.println(g+"---"+g.hashCode());
+		System.out.println(t.get(26));//测试get方法。
+		
+	}}
+	
+
+加入get方法和泛型
+/**
+ * HashMap底层原理：数组加链表的结构，位桶数组（一般是table），数组中的元素为链表
+ * @author Administrator
+ *
+ *1：获得key对象的hashcode,调用hashcode()方法，获得hashcode，数据是以hashcode的
+ *形式存储在计算机中的，hashcode是一个整数。
+ *2：根据hashcode计算出hash值（要求在0，数组长度-1）之间。用&或者%运算，目的是将数据
+ *尽可能均匀的分布。
+ *3：生成Entry对象，Entry对象包括key对象，value对象，hash值，指向下一个对象的引用
+ *（节点）
+ *4：将Entry对象放到table数组中，如果数组中还没有元素，则直接放入，如果有Entry对象，
+ *则将已有Entry对象的next指向新的Entry,形成链表。
+ */
+
+public class TestHashMap2<K,V> {//定义TestHashMap类。
+	int size;//size为数组的元素个数、
+	Node3 table[];//定义table位桶数组。	Ctrl+f查找当页，可以替换对象。
+	public TestHashMap2() {
+		table=new Node3[16];//确定table数组的大小和元素类型。
+
+	}
+	//创建get方法。
+	public V get(K key) {//返回的是V类型的value,传入的是K类型的key。
+		//先通过key值获得对应的hash值，方便寻找位桶数组的位置。
+		int hash=myHash(key.hashCode(),table.length);
+
+		V value=null;
+		//如果table[hash]为null，则该位置没有元素，直接返回value
+		if(table[hash]!=null) {
+		Node3 temp=table[hash];//取第一个节点temp.
+		//当temp不为空时比较对应的key值，利用遍历来比较
+		while(temp!=null) {
+			//如果temp节点的key值和传入的key值相等则temp的value即为所求。
+			if(temp.key.equals(key)) {
+				value=(V)temp.value;//需要强制转型。
+				break;
+			}else {//不相等则比较下一个
+				temp=temp.next;
+			}
+
+		}
+		}
+
+		return value;
+		}
+	//创建put方法。
+	public void put(K key,V value) {
+		//完整的put方法还需要考虑数组扩容问题。
+
+		Node3 newnode =new Node3();//创建Node对象。
+		newnode.hash=myHash(key.hashCode(),table.length);//为newnode对象的成员变量
+		//赋值、
+		newnode.key=key;
+		newnode.value=value;
+		newnode.next=null;
+		boolean keyRepeat=false;//创建boolean对象，
+		Node3 iterlast=null;//创建Node3对象，保存temp值。
+		Node3 temp=table[newnode.hash];//将Node节点和table数组联系起来。
+		if(temp==null) {//判断table数组对应位置是否为空。
+			table[newnode.hash]=newnode;//若为空则直接将newnode放在该位置。
+			size++;
+		}else {//若不为空则需要链表形式添加newnode。
+
+		//当temp不为空时，利用while循环，挨个比较key的值，若有相同则覆盖。
+			while(temp!=null) {
+				//若key的值相同就覆盖。
+				if(temp.key.equals(key)) {
+					System.out.println("key值重复了");
+					keyRepeat=true;//如果发生重复则将keyRepeat的值变为true。
+					temp.value=value;//直接将value值赋给temp即可，其他值不变。
+				break;
+				//key值不重复，遍历下一个。
+				}else {
+					iterlast=temp;//用iterlast保存temp的值。
+					temp=temp.next;//遍历新的temp的下一个对象。
+
+				}size++;
+			}
+			if(!keyRepeat) {//若没有发生重复则keyRepeat的值为默认的false，!keyRepeat=true;执行下面的语句。若发生重复
+			//则keyRepeat的值在前面被改为true，!keyRepeat=false,不执行下面的语句，若没有这个判断，则每次循环完都会
+				//执行iterlast.next=newnode,若key值重复则iterlast值为默认的null，iterlast.next会空指针。
+			iterlast.next=newnode;//当temp.next=null时，退出循环，此时的temp的值为null，如果不用iterlast保存前一个
+			//temp的值而直接用temp.next=newnode;会出现空指针的情况。
+				size++;
+			}
+			}
+
+
+
+
+			}
+	//重写toString方法打印数据
+	public String toString() {
+		//创建StringBuilder对象。
+				StringBuilder sb=new StringBuilder("{") ;
+				//利用for循环遍历位桶数组中的元素
+				for(int i=0;i<table.length;i++) {
+					Node3 temp=table[i];
+					//使用循环遍历元素中的链表
+					while(temp!=null) {//while循环多用于boolean条件的循环，for则多用于范围内的循环。
+						sb.append(temp.key+":"+temp.value+",");
+						temp=temp.next;
+
+					}
+				}sb.setCharAt(sb.length()-1,'}');
+				return sb.toString();
+
+			}
+
+
+
+	public  static int myHash(int v,int length) {//添加myHash方法，v为键对象的hashcode值，数据是
+		//以一串数字的形式存储在计算机中，这串数字就是hashcode
+//		System.out.println("hash myhash:"+(v&(length-1)));//通过按为与运算取得hash值，
+//		//int类型的数据&运算其实是将数据的二进制码进行与运算，1为真，0为假。
+//		System.out.println("hash myhash:"+(v%(length-1)));//直接进行取余运算。
+		return v&(length-1);//无论是与运算还是取余，都是为了将数据跟分散的放在数组中。
+		//效率来讲与运算高于取余。
+	}
+
+
+
+	public static void main(String[] args) {
+		TestHashMap2<Integer,String> t=new TestHashMap2<>();//加入泛型之后再调用方法就需要写数据类型。
+		t.put(10, "aa");//调用put方法，已经将链表的雏形构建出来了。用不同算法算出的hash值
+		//不一定相同，hash值的目的是尽量均匀的分散数据。
+		t.put(20, "bb");
+		t.put(30,"cc");
+		t.put(10, "sssss");//测试key值重复时是否覆盖,key值相同则key.hashCode也相同。
+		System.out.println(t);
+		//利用for循环找出具有相同hash值的key.hashCode值。
+		//for(int i=10;i<100;i++) {
+			//System.out.println(i+"---"+myHash(i,16));//静态方法内部的方法只能调用静态方法，所以需要将myHash()方法改为static方法
+		//需要用字符串将输出变成字符串，否则输出为i+myHash(i,16)的值。26 42 58Ctrl+z撤销上一步操作。
+		//}
+		//测试相同hash值的对象是否被分到同一个链表中。
+		t.put(26, "hhh");
+		t.put(42, "ggg");
+		t.put(58, "ddd");
+		System.out.println(t);
+		//Object h=26;int类型是基本数据类型，不是对象，没有方法
+		//Object g=42;数字的hashCode就是数字本身。
+		//System.out.println(h+"---"+h.hashCode());
+		//System.out.println(g+"---"+g.hashCode());
+		System.out.println(t.get(26));//测试get方法。
+
+	}}
+
+
+
+
