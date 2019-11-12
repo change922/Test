@@ -1,0 +1,62 @@
+import java.util.Set;
+import java.util.TreeSet;
+
+public class TestTreeSet {
+	public static void main(String[] args) {
+		Set<Integer>set=new TreeSet<>();
+		set.add(222);
+		set.add(111);
+		set.add(33);
+		for(Integer m:set) {
+			System.out.println(m);
+		}
+		Set< Emp2> set2=new TreeSet<>();
+		set2.add(new Emp2(121,"张三",2000));
+		set2.add(new Emp2(101,"李四",5000));
+		set2.add(new Emp2(11,"王五",3000));
+		set2.add(new Emp2(51,"赵六",6000));
+		for(Emp2 m:set2) {//分开遍历两个Set对象。
+			System.out.println(m);
+		}
+	}}
+
+		
+	class Emp2 implements  Comparable<Emp2> {
+		int id;
+		String name;
+		double salary;
+		
+		public String toString() {
+			//StringBuilder sb=new StringBuilder("[");//每次遍历的对象不同，没法用一个StringBuilder来解决。
+			
+					
+			return ("id,"+id+"name,"+name+"salary,"+salary);	
+			}
+			
+	
+		public int compareTo(Emp2 o) {
+			if(this.salary<o.salary) {
+				return -1;
+			}else if(this.salary>o.salary) {
+				return 1;
+			}else {
+				if(this.id<o.id) {
+					return -1;
+				}else if(this.id>o.id) {
+					return 1;
+				}else {
+					
+					return 0;
+				}
+			}
+			
+		}
+
+		public Emp2(int id, String name, double salary) {
+			super();
+			this.id = id;
+			this.name = name;
+			this.salary = salary;
+		}
+	}
+

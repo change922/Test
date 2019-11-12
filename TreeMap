@@ -1,0 +1,91 @@
+import java.util.Map;
+import java.util.TreeMap;
+
+/**
+ * Map类有两个常用接口，HashMap,线程不安全，效率高，key值和value值可以为空。
+ * HashTable,线程安全，效率低，key值和value值不可为空。TreeMap用于排序。
+ * @author Administrator
+ *
+ */
+public class TestTreeMap {
+	public static void main(String[] args) {
+		Map<Integer,String> treemap=new TreeMap<>();
+		treemap.put(11, "aa");
+		treemap.put(33, "bb");
+		treemap.put(22, "cc");
+		//System.out.println(treemap);
+		//按照key递增的方式进行排序
+		for(Integer key:treemap.keySet()) {//遍历treemap中的元素。
+			System.out.println(key+"---"+treemap.get(key));
+		}
+		Map<Emp,String> treemap1=new TreeMap<>();
+		treemap1.put(new Emp(111,"张三",20000), "张三是个好小伙");//添加新的Emp对象需要new对象。
+		treemap1.put(new Emp/*Emp1*/(44,"李四",5000),"李四整天摸鱼");//Emp是类的类型，不是名字，创建新的Emp对象时不用改名字
+		treemap1.put(new Emp(44,"王五",10000), "王五还不错");
+		treemap1.put(new Emp(200,"赵六",10000), "赵六很积极");
+     for(Emp key:treemap1.keySet()) {//遍历treemap中的元素。
+    	 System.out.println(key+"---"+treemap1.get(key));
+     }    
+	}
+
+}
+class Emp implements Comparable<Emp>{//用Comparable接口实现自定义类的排序。
+	int id;
+	String name;
+	double salary;
+	public Emp(int id, String name, double salary) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+	}
+	//重写toString方法来打印Emp对象中的内容。
+		public String toString() {
+	return ("id,"+id+"，name"+name+"，salary"+salary);//前面已经遍历了元素，这里可以直接打印。
+		}
+	@Override
+	public int compareTo(Emp o) {//负数：小于，0小于，正数：等于。
+		//先按照薪资排序
+		if(this.salary>o.salary) {
+	return 1;
+		}else if(this.salary<o.salary) {
+	return -1;
+	//若薪资相同则按照ID排序
+		}else {
+			if(this.id>o.id) {
+				return 1;
+			}else if(this.id<o.id) {
+				return -1;
+	//若薪资和ID都相等，则他两相等。
+			}else {
+				return 0;
+				
+			}
+		}
+		
+	}
+	
+}
+
+自定义的类排序需要Comparable接口
+public int compareTo(Emp o) {//负数：小于，0小于，正数：等于。
+		//先按照薪资排序
+		if(this.salary>o.salary) {
+	return 1;
+		}else if(this.salary<o.salary) {
+	return -1;
+	//若薪资相同则按照ID排序
+		}else {
+			if(this.id>o.id) {
+				return 1;
+			}else if(this.id<o.id) {
+				return -1;
+	//若薪资和ID都相等，则他两相等。
+			}else {
+				return 0;
+
+			}
+		}
+
+	}
+
